@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckpointRespawn : MonoBehaviour {
-
+public class Checkpoint : MonoBehaviour
+{
     [Tooltip("ID of the spawn point to teleport to")]
     public string targetSpawnPointID;
 
