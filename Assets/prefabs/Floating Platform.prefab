@@ -303,7 +303,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 25a9fb42d361f46ad89221f6d301e96e, type: 2}
+  - {fileID: 2100000, guid: 745bd829de7127e41be93ee5117f805a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -375,6 +375,8 @@ MonoBehaviour:
   moveDistance: 3
   moveSpeed: 1
   moveDirection: {x: 1, y: 0, z: 0}
+  phaseOffset: 0
+  timeOffset: 0
 --- !u!1 &7962794910288149624
 GameObject:
   m_ObjectHideFlags: 0
