@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckPointRespawn : MonoBehaviour {
-    private bool _found;
+public class CheckpointRespawn : MonoBehaviour {
+
     [Tooltip("ID of the spawn point to teleport to")]
     public string targetSpawnPointID;
 
@@ -21,21 +21,32 @@ public class CheckPointRespawn : MonoBehaviour {
             {
                 if (spawnPoint.spawnPointID == targetSpawnPointID)
                 {
+                    Transform playerTransform = null;
 
-                    Transform playerTransform = other.gameObject.CompareTag("Player") ?
-                        other.transform : other.transform.parent;
+                    if (other.gameObject.CompareTag("Player"))
+                    {
+                        playerTransform = other.transform;
+                    }
+                    else if (other.transform.parent != null && other.transform.parent.CompareTag("Player"))
+                    {
+                        playerTransform = other.transform.parent;
+                    }
+
+                    if (playerTransform == null)
+                    {
+                        Debug.Log("Player tag not found.");
+                        return;
+                    }
+
 
 
                     playerTransform.position = spawnPoint.transform.position;
                     playerTransform.rotation = spawnPoint.transform.rotation;
 
                     Debug.Log("Player teleported to: " + targetSpawnPointID);
-                    _found = true;
+
                     break;
 
-                } if(!_found)
-                {
-                    Debug.Log($"Spawn point: {spawnPoint} not found, check that it is correct or it exists.");
                 }
             }
         }
