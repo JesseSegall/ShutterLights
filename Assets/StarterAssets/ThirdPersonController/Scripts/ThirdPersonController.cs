@@ -75,6 +75,8 @@ namespace StarterAssets
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
 
+        public Vector2 LookSensitivity;
+
         // cinemachine
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
@@ -190,25 +192,31 @@ namespace StarterAssets
             }
         }
 
+        public float cameraSensitivity = 0.5f; // Adjust this value to control camera speed
+
         private void CameraRotation()
         {
             // if there is an input and camera position is not fixed
             if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
             {
-                //Don't multiply mouse input by Time.deltaTime;
+                // Don't multiply mouse input by Time.deltaTime for mouse control; for other devices, use Time.deltaTime.
                 float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
 
-                _cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier;
-                _cinemachineTargetPitch += _input.look.y * deltaTimeMultiplier;
+                // Apply the sensitivity multiplier
+                _cinemachineTargetYaw += _input.look.x * cameraSensitivity * deltaTimeMultiplier;
+                _cinemachineTargetPitch += _input.look.y * cameraSensitivity * deltaTimeMultiplier;
             }
 
-            // clamp our rotations so our values are limited 360 degrees
+            // Clamp our rotations
             _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
             _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
 
-            // Cinemachine will follow this target
-            CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
-                _cinemachineTargetYaw, 0.0f);
+            // Update the Cinemachine target rotation
+            CinemachineCameraTarget.transform.rotation = Quaternion.Euler(
+                _cinemachineTargetPitch + CameraAngleOverride,
+                _cinemachineTargetYaw, 
+                0.0f
+            );
         }
 
         private void Move()
@@ -227,7 +235,6 @@ namespace StarterAssets
 
             float speedOffset = 0.1f;
             float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
-
             // accelerate or decelerate to target speed
             if (currentHorizontalSpeed < targetSpeed - speedOffset ||
                 currentHorizontalSpeed > targetSpeed + speedOffset)
