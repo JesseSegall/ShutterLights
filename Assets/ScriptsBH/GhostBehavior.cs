@@ -12,19 +12,32 @@ public class GhostBehavior : MonoBehaviour
     public Transform[] waypoints;
     public float moveSpeed = 2f;
     public float chaseSpeed = 3f;
-    public float detectionRange = 2f;
-    public float stoppingDistance = 1f;
+    public float detectionRange = 5f;
+    public float stoppingDistance = 2f;
 
     private Transform player;
     private AIState state = AIState.Patrol;
     private int currentWaypointIndex = 0; 
     private Animator animator;
 
+    public AudioSource audioSource;
+    public AudioClip ghostAggro;
+    public AudioClip death;
+
+    private bool hasPlayedChaseSound = false;
+
+
     void Start()
     {
         player = GameObject.FindWithTag("Player").transform; 
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
 
+        if (audioSource == null)
+    {
+        Debug.LogError("AudioSource is missing on " + gameObject.name);
+    }
+        
         if (waypoints.Length > 0)
         {
             transform.position = waypoints[0].position;
@@ -39,6 +52,11 @@ public class GhostBehavior : MonoBehaviour
                 Patrol();
                 break;
             case AIState.Chase:
+                if (!hasPlayedChaseSound) // Play sound only once per chase state
+            {
+                PlayChaseSound();
+                hasPlayedChaseSound = true;
+            }
                 ChasePlayer();
                 break;
         }
@@ -63,11 +81,15 @@ public class GhostBehavior : MonoBehaviour
         if (Vector3.Distance(transform.position, player.position) < detectionRange)
         {
             state = AIState.Chase;
+            hasPlayedChaseSound = false;
+            
+
         }
     }
 
     void ChasePlayer()
     {
+        
         float speed = chaseSpeed;
         MoveTowards(player.position, speed);
         animator.SetFloat("Speed", speed);
@@ -92,7 +114,21 @@ public class GhostBehavior : MonoBehaviour
     {
         if (other.CompareTag("Player")) 
         {
-            gameObject.SetActive(false); 
+            PlayDeathSound();
+            Invoke("DisableGhost", death.length);
         }
     }
+
+    void PlayChaseSound(){
+        audioSource.PlayOneShot(ghostAggro);
+    }
+
+    void PlayDeathSound(){
+        audioSource.PlayOneShot(death);
+    }
+
+    void DisableGhost()
+{
+    gameObject.SetActive(false);
+}
 }
