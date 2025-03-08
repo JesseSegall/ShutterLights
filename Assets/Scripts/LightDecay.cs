@@ -40,4 +40,18 @@ public class LightDecay : MonoBehaviour
             }
         }
     }
+
+
+    public void GhostContactAreaLight(float damageAmount)
+    {
+        timer += damageAmount; // Increase the decay timer
+        float ratio = Mathf.Clamp01(1 - (timer / decayDuration));
+        
+        areaLight.intensity = initialIntensity * ratio;
+        
+        if (ratio <= 0f)
+            {
+                areaLight.enabled = false;
+            }
+    }
 }
