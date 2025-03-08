@@ -141,11 +141,6 @@ public class GhostBehavior : MonoBehaviour
         audioSource.PlayOneShot(death);
     }
 
-    //void DisableGhost()
-//{
-  //  gameObject.SetActive(false);
-//}
-
 IEnumerator FadeOutGhost(float duration)
     {
         float elapsedTime = 0f;
