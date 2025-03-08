@@ -24,7 +24,12 @@ public class GhostBehavior : MonoBehaviour
     public AudioClip ghostAggro;
     public AudioClip death;
 
+    private SkinnedMeshRenderer meshRenderer;
+
     private bool hasPlayedChaseSound = false;
+
+    private bool isDying = false;
+
 
 
     void Start()
@@ -32,6 +37,8 @@ public class GhostBehavior : MonoBehaviour
         player = GameObject.FindWithTag("Player").transform; 
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+
+        meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
 
         if (audioSource == null)
     {
@@ -46,6 +53,7 @@ public class GhostBehavior : MonoBehaviour
 
     void Update()
     {
+        if (isDying) return;
         switch (state)
         {
             case AIState.Patrol:
@@ -114,8 +122,14 @@ public class GhostBehavior : MonoBehaviour
     {
         if (other.CompareTag("Player")) 
         {
+            LightDecayStatusBar lightBar = other.GetComponentInChildren<LightDecayStatusBar>();
+            LightDecay lightArea = other.GetComponentInChildren<LightDecay>();
+            lightBar.GhostContact(2f);
+            lightArea.GhostContactAreaLight(2f);
+            isDying = true;
             PlayDeathSound();
-            Invoke("DisableGhost", death.length);
+            animator.SetTrigger("Death");
+            StartCoroutine(WaitForDeathAnimation());
         }
     }
 
@@ -127,8 +141,32 @@ public class GhostBehavior : MonoBehaviour
         audioSource.PlayOneShot(death);
     }
 
-    void DisableGhost()
-{
-    gameObject.SetActive(false);
-}
+    //void DisableGhost()
+//{
+  //  gameObject.SetActive(false);
+//}
+
+IEnumerator FadeOutGhost(float duration)
+    {
+        float elapsedTime = 0f;
+        Material material = meshRenderer.material;
+        Color startColor = material.color;
+
+        while (elapsedTime < duration)
+        {
+            float newAlpha = Mathf.Lerp(startColor.a, 0f, elapsedTime / duration);
+            material.color = new Color(startColor.r, startColor.g, startColor.b, newAlpha);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        material.color = new Color(startColor.r, startColor.g, startColor.b, 0f);
+        gameObject.SetActive(false);
+    }
+
+    IEnumerator WaitForDeathAnimation()
+    {
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        StartCoroutine(FadeOutGhost(1f)); 
+    }
 }
