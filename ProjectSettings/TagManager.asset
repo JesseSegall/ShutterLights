@@ -8,6 +8,9 @@ TagManager:
   - Floating Platform
   - MovingPlatform
   - KillTrigger
+  - Boss
+  - theboss
+  - Terrain
   layers:
   - Default
   - TransparentFX
