@@ -9,6 +9,11 @@ public class HighJumpOrb : MonoBehaviour
     public float jumpMultiplier = 2.0f;   // How many times higher the jump becomes
     public float boostDuration = 15f;     // Duration of the boost in seconds
 
+    public float respawnTime = 5f;
+    private Vector3 spawnPosition;
+    private MeshRenderer meshRenderer;
+    private Collider orbCollider;
+
     // Reference to a UI Image to display boost duration (optional)
     public Image boostStatusBar;
 
@@ -16,6 +21,15 @@ public class HighJumpOrb : MonoBehaviour
     private static Coroutine currentBoostCoroutine;
     private static float originalJumpHeight;
     
+
+    private void Start()
+    {
+        spawnPosition = transform.position;
+        meshRenderer = GetComponent<MeshRenderer>();
+        orbCollider = GetComponent<Collider>();
+        
+    }
+
     private void Awake()
     {
         // If the boostStatusBar isn't set in the Inspector, try to find it by name
@@ -61,9 +75,9 @@ public class HighJumpOrb : MonoBehaviour
                 
                 // Start the boost coroutine and store its reference
                 currentBoostCoroutine = controller.StartCoroutine(BoostJump(controller));
-                
-                // Destroy the orb so it can only be used once
-                Destroy(gameObject);
+                StartCoroutine(RespawnOrb());
+                meshRenderer.enabled = false;
+                orbCollider.enabled = false;
             }
         }
     }
@@ -98,5 +112,14 @@ public class HighJumpOrb : MonoBehaviour
         
         // Clear the boost coroutine reference
         currentBoostCoroutine = null;
+    }
+
+        private IEnumerator RespawnOrb()
+    {
+        yield return new WaitForSeconds(respawnTime);
+        //Debug.Log("respawn");
+        transform.position = spawnPosition;
+        meshRenderer.enabled = true;
+        orbCollider.enabled = true;
     }
 }

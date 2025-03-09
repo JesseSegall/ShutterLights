@@ -19,6 +19,12 @@ public class SpeedBoostOrb : MonoBehaviour
     private static Coroutine currentBoostCoroutine;
     private static float originalMoveSpeed;
     private static float originalSprintSpeed;
+
+    //Respawn orbs variables
+    public float respawnTime = 5f;
+    private Vector3 spawnPosition;
+    private MeshRenderer meshRenderer;
+    private Collider orbCollider;
     
     private void Awake()
     {
@@ -38,6 +44,14 @@ public class SpeedBoostOrb : MonoBehaviour
             boostStatusBar.fillAmount = 0;
             boostStatusBar.gameObject.SetActive(false);
         }
+    }
+
+    private void Start()
+    {
+        spawnPosition = transform.position;
+        meshRenderer = GetComponent<MeshRenderer>();
+        orbCollider = GetComponent<Collider>();
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -67,9 +81,9 @@ public class SpeedBoostOrb : MonoBehaviour
                 
                 // Start the boost coroutine and store its reference
                 currentBoostCoroutine = controller.StartCoroutine(BoostSpeed(controller));
-                
-                // Optionally, destroy the orb so it can only be used once
-                Destroy(gameObject);
+                StartCoroutine(RespawnOrb());
+                meshRenderer.enabled = false;
+                orbCollider.enabled = false;
             }
         }
     }
@@ -122,5 +136,13 @@ public class SpeedBoostOrb : MonoBehaviour
         
         // Clear the boost coroutine flag.
         currentBoostCoroutine = null;
+    }
+    private IEnumerator RespawnOrb()
+    {
+        yield return new WaitForSeconds(respawnTime);
+        //Debug.Log("respawn");
+        transform.position = spawnPosition;
+        meshRenderer.enabled = true;
+        orbCollider.enabled = true;
     }
 }

@@ -1,9 +1,8 @@
 using UnityEngine;
 using System.Collections;
-public class LightOrb : MonoBehaviour
+
+public class LightOrbRespawn : MonoBehaviour
 {
-    // How much "time" to subtract from the decay timer (i.e., how much to boost the light level)
-    public float boostTime = 5f;
     public float respawnTime = 5f;
     private Vector3 spawnPosition;
     private MeshRenderer meshRenderer;
@@ -22,18 +21,12 @@ public class LightOrb : MonoBehaviour
         // Ensure the orb only reacts to the player (adjust tag as needed)
         if (other.CompareTag("Player"))
         {
-            // Find the LightDecayStatusBar in the scene.
-            LightDecayStatusBar lightDecay = FindObjectOfType<LightDecayStatusBar>();
-            if (lightDecay != null)
-            {
-                // Increase the light level by subtracting boostTime from the timer.
-                lightDecay.IncreaseLight(boostTime);
-            }
-                        // Destroy the orb so it can only be used once.
+            // Destroy the orb so it can only be used once.
             StartCoroutine(RespawnOrb());
             meshRenderer.enabled = false;
             orbCollider.enabled = false;
         }
+
     }
 
     private IEnumerator RespawnOrb()
@@ -44,4 +37,4 @@ public class LightOrb : MonoBehaviour
         meshRenderer.enabled = true;
         orbCollider.enabled = true;
     }
-}
+} 
