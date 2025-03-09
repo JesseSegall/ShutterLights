@@ -67,26 +67,19 @@ public class BossBehavior : MonoBehaviour
 
     private IEnumerator ThrowState()
 {
-    state = BossState.Throw; // Set state to Throw
+    state = BossState.Throw; 
     isThrowing = true;
     animator.SetTrigger("Throw");
-
-    // Wait for the animation to finish (adjust based on animation length)
     yield return new WaitForSeconds(3f);
-
-    // Create the projectile AFTER animation delay
     GameObject newProjectile = Instantiate(bossProjectile, transform.position + transform.forward * 12f + Vector3.up * 20f, Quaternion.identity);
     newProjectile.GetComponent<MeshRenderer>().enabled = true;
-
-    // Use Rigidbody for movement
     Rigidbody rb = newProjectile.GetComponent<Rigidbody>();
     Vector3 direction = (player.transform.position - newProjectile.transform.position).normalized;
     float projectileSpeed = 30f;
     rb.velocity = direction * projectileSpeed;
-
     animator.ResetTrigger("Throw");
     isThrowing = false;
-    // Change state after the throw
+    
     if (bossHealth <= 50)
     {
         state = BossState.Spin;

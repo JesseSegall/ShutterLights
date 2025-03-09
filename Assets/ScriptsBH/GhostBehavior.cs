@@ -43,8 +43,12 @@ public class GhostBehavior : MonoBehaviour
         if (audioSource == null)
     {
         Debug.LogError("AudioSource is missing on " + gameObject.name);
+
     }
-        
+        Material material = meshRenderer.sharedMaterial;
+        Color resetColor = material.color;
+        resetColor.a = 1f; 
+        material.color = resetColor;
         if (waypoints.Length > 0)
         {
             transform.position = waypoints[0].position;
@@ -60,7 +64,7 @@ public class GhostBehavior : MonoBehaviour
                 Patrol();
                 break;
             case AIState.Chase:
-                if (!hasPlayedChaseSound) // Play sound only once per chase state
+                if (!hasPlayedChaseSound)
             {
                 PlayChaseSound();
                 hasPlayedChaseSound = true;
