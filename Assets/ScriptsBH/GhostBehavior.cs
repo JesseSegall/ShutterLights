@@ -12,22 +12,17 @@ public class GhostBehavior : MonoBehaviour
     public Transform[] waypoints;
     public float moveSpeed = 2f;
     public float chaseSpeed = 3f;
-    public float detectionRange = 5f;
+    public float detectionRange = 4f;
     public float stoppingDistance = 2f;
-
     private Transform player;
     private AIState state = AIState.Patrol;
     private int currentWaypointIndex = 0; 
     private Animator animator;
-
     public AudioSource audioSource;
     public AudioClip ghostAggro;
     public AudioClip death;
-
     private SkinnedMeshRenderer meshRenderer;
-
     private bool hasPlayedChaseSound = false;
-
     private bool isDying = false;
 
 
@@ -37,7 +32,6 @@ public class GhostBehavior : MonoBehaviour
         player = GameObject.FindWithTag("Player").transform; 
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
-
         meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
 
         if (audioSource == null)
