@@ -2,18 +2,15 @@ using UnityEngine;
 
 public class LightDecay : MonoBehaviour
 {
-    // The starting intensity of the light.
     public float initialIntensity = 5f;
-    // How long (in seconds) it takes for the light to decay to 0.
-    public float decayDuration = 15f;
-
     private Light areaLight;
-    private float timer = 0f;
+    private LightDecayStatusBar lightDecayStatus; // Reference to the status bar
 
     private void Start()
     {
-        // Get the Light component attached to this GameObject.
         areaLight = GetComponent<Light>();
+        lightDecayStatus = FindObjectOfType<LightDecayStatusBar>(); // Get the status bar script
+
         if (areaLight != null)
         {
             areaLight.intensity = initialIntensity;
@@ -22,36 +19,28 @@ public class LightDecay : MonoBehaviour
 
     private void Update()
     {
-        if (areaLight != null)
+        if (areaLight != null && lightDecayStatus != null)
         {
-            // Increase the timer with the elapsed time.
-            timer += Time.deltaTime;
-
-            // Calculate a ratio (1 when the boost starts, 0 when the time has elapsed).
-            float ratio = Mathf.Clamp01(1 - (timer / decayDuration));
-
-            // Update the light's intensity based on the ratio.
+            // Sync intensity with the status bar's fill amount
+            float ratio = lightDecayStatus.GetCurrentRatio();
             areaLight.intensity = initialIntensity * ratio;
 
-            // Optionally, disable the light when it fully decays.
             if (ratio <= 0f)
             {
-                areaLight.enabled = false;
+                areaLight.enabled = false; // Turn off the light when depleted
+            }
+            else
+            {
+                areaLight.enabled = true; // Keep light active if bar isn't empty
             }
         }
     }
 
-
     public void GhostContactAreaLight(float damageAmount)
     {
-        timer += damageAmount; // Increase the decay timer
-        float ratio = Mathf.Clamp01(1 - (timer / decayDuration));
-        
-        areaLight.intensity = initialIntensity * ratio;
-        
-        if (ratio <= 0f)
-            {
-                areaLight.enabled = false;
-            }
+        if (lightDecayStatus != null)
+        {
+            lightDecayStatus.GhostContact(damageAmount); // Apply damage through status bar
+        }
     }
 }

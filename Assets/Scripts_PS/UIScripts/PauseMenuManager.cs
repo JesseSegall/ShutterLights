@@ -54,7 +54,7 @@ public class PauseMenuManager : MonoBehaviour
 
     public void ResumeGame()
     {
-        pauseMenuUI.SetActive(true);
+        pauseMenuUI.SetActive(false);
         isPaused = false;
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
@@ -68,7 +68,7 @@ public class PauseMenuManager : MonoBehaviour
         public void RestartGame()
     {
         Time.timeScale = 1f; // Reset time scale
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Additive);
     }
 
     public void QuitGame()
