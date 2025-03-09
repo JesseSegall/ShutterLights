@@ -9,8 +9,11 @@ public class LightDecayStatusBar : MonoBehaviour
     public Image lightStatusBar;
     public YouDiedScreenManager youDiedManager;
 
+    public Light areaLight;
     private float timer = 0f;
     private bool gameOverTriggered = false;
+
+
 
     private void Start()
     {
@@ -60,28 +63,28 @@ public class LightDecayStatusBar : MonoBehaviour
     }
 
     public void GhostContact(float damageAmount)
-    {
-        timer += damageAmount;
-        float ratio = Mathf.Clamp01(1 - (timer / decayDuration));
-        areaLight.intensity = initialIntensity * ratio;
-        lightStatusBar.fillAmount = ratio;
-        
-        
-        if (ratio <= 0f && !gameOverTriggered)
         {
-            gameOverTriggered = true;
+            timer += damageAmount;
+            float ratio = Mathf.Clamp01(1 - (timer / decayDuration));
+            areaLight.intensity = initialIntensity * ratio;
+            lightStatusBar.fillAmount = ratio;
 
-            if (PlayerDeath.Instance != null)
-            {
-                PlayerDeath.Instance.TriggerDeath();
-            }
 
-            if (youDiedManager != null)
+            if (ratio <= 0f && !gameOverTriggered)
             {
-                youDiedManager.ShowYouDiedScreen();
+                gameOverTriggered = true;
+
+                if (PlayerDeath.Instance != null)
+                {
+                    PlayerDeath.Instance.TriggerDeath();
+                }
+
+                if (youDiedManager != null)
+                {
+                    youDiedManager.ShowYouDiedScreen();
+                }
             }
         }
-    }
 
     public float GetCurrentRatio()
     {

@@ -4,6 +4,8 @@ public class LightDecay : MonoBehaviour
 {
     public float initialIntensity = 5f;
     private Light areaLight;
+    private float timer;
+    public float decayDuration = 15f;
     private LightDecayStatusBar lightDecayStatus; // Reference to the status bar
 
     private void Start()
@@ -35,17 +37,16 @@ public class LightDecay : MonoBehaviour
             }
         }
     }
-
     public void GhostContactAreaLight(float damageAmount)
-    {
-        timer += damageAmount;
-        float ratio = Mathf.Clamp01(1 - (timer / decayDuration));
-        
-        areaLight.intensity = initialIntensity * ratio;
-        
-        if (ratio <= 0f)
-            {
-                areaLight.enabled = false;
-            }
-    }
+        {
+            timer += damageAmount;
+            float ratio = Mathf.Clamp01(1 - (timer / decayDuration));
+
+            areaLight.intensity = initialIntensity * ratio;
+
+            if (ratio <= 0f)
+                {
+                    areaLight.enabled = false;
+                }
+        }
 }
