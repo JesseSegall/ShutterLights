@@ -14,7 +14,7 @@ public class StartScreenManager : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene("Room_1_psandvoal"); // Load immediately if no sound
+            SceneManager.LoadScene("MainScene"); // Load immediately if no sound
         }
     }
 
@@ -22,6 +22,6 @@ public class StartScreenManager : MonoBehaviour
     {
         startSound.Play(); // Play the sound effect
         yield return new WaitForSeconds(startSound.clip.length); // Wait for the sound to finish
-        SceneManager.LoadScene("Room_1_psandvoal"); // Load the next scene
+        SceneManager.LoadScene("MainScene"); // Load the next scene
     }
 }
