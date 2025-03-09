@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/StartScreen.unity
     guid: 32949b5087efe41c1abb22ebee251863
   - enabled: 1
-    path: Assets/Scenes/Room_1.unity
+    path: Assets/Scenes/Room_1_psandvoal.unity
     guid: b2d8bdcb15ba2484ab0505997a610304
   - enabled: 1
     path: Assets/Scenes/MainScene.unity
