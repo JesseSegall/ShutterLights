@@ -6300,8 +6300,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossProjectile: {fileID: 1577325806}
-  bossHealth: 10
+  bossHealth: 100
   youWinCanvas: {fileID: 928882600}
+  healthBar: {fileID: 1353059002}
 --- !u!1 &339332585
 GameObject:
   m_ObjectHideFlags: 0

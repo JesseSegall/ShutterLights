@@ -70,29 +70,29 @@ public class BossBehavior : MonoBehaviour
     }
 
     private IEnumerator ThrowState()
-{
-    state = BossState.Throw; 
-    isThrowing = true;
-    animator.SetTrigger("Throw");
-    yield return new WaitForSeconds(3f);
-    GameObject newProjectile = Instantiate(bossProjectile, transform.position + transform.forward * 12f + Vector3.up * 20f, Quaternion.identity);
-    newProjectile.GetComponent<MeshRenderer>().enabled = true;
-    Rigidbody rb = newProjectile.GetComponent<Rigidbody>();
-    Vector3 direction = (player.transform.position - newProjectile.transform.position).normalized;
-    float projectileSpeed = 30f;
-    rb.velocity = direction * projectileSpeed;
-    animator.ResetTrigger("Throw");
-    isThrowing = false;
+    {
+        state = BossState.Throw; 
+        isThrowing = true;
+        animator.SetTrigger("Throw");
+        yield return new WaitForSeconds(3f);
+        GameObject newProjectile = Instantiate(bossProjectile, transform.position + transform.forward * 12f + Vector3.up * 20f, Quaternion.identity);
+        newProjectile.GetComponent<MeshRenderer>().enabled = true;
+        Rigidbody rb = newProjectile.GetComponent<Rigidbody>();
+        Vector3 direction = (player.transform.position - newProjectile.transform.position).normalized;
+        float projectileSpeed = 30f;
+        rb.velocity = direction * projectileSpeed;
+        animator.ResetTrigger("Throw");
+        isThrowing = false;
     
-    if (bossHealth <= 50)
-    {
-        state = BossState.Spin;
-    }
-    else
-    {
-        state = BossState.Idle;
-        StartCoroutine(IdleState());
-    }
+        if (bossHealth <= 50)
+        {
+            state = BossState.Spin;
+        }
+        else
+        {
+            state = BossState.Idle;
+            StartCoroutine(IdleState());
+        }
 }
 
     private IEnumerator IdleState(){

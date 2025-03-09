@@ -63,12 +63,10 @@ public class LightDecayStatusBar : MonoBehaviour
     {
         timer += damageAmount;
         float ratio = Mathf.Clamp01(1 - (timer / decayDuration));
-
-        if (lightStatusBar != null)
-        {
-            lightStatusBar.fillAmount = ratio;
-        }
-
+        areaLight.intensity = initialIntensity * ratio;
+        lightStatusBar.fillAmount = ratio;
+        
+        
         if (ratio <= 0f && !gameOverTriggered)
         {
             gameOverTriggered = true;

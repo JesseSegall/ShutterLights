@@ -38,9 +38,14 @@ public class LightDecay : MonoBehaviour
 
     public void GhostContactAreaLight(float damageAmount)
     {
-        if (lightDecayStatus != null)
-        {
-            lightDecayStatus.GhostContact(damageAmount); // Apply damage through status bar
-        }
+        timer += damageAmount;
+        float ratio = Mathf.Clamp01(1 - (timer / decayDuration));
+        
+        areaLight.intensity = initialIntensity * ratio;
+        
+        if (ratio <= 0f)
+            {
+                areaLight.enabled = false;
+            }
     }
 }
