@@ -121,9 +121,9 @@ public class GhostBehavior : MonoBehaviour
         if (other.CompareTag("Player")) 
         {
             LightDecayStatusBar lightBar = other.GetComponentInChildren<LightDecayStatusBar>();
-            LightDecay lightArea = other.GetComponentInChildren<LightDecay>();
+            //LightDecay lightArea = other.GetComponentInChildren<LightDecay>();
             lightBar.GhostContact(2f);
-            lightArea.GhostContactAreaLight(2f);
+            //lightArea.GhostContactAreaLight(2f);
             isDying = true;
             PlayDeathSound();
             animator.SetTrigger("Death");
