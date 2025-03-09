@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 
 [RequireComponent(typeof(CanvasGroup))]
@@ -8,7 +10,7 @@ public class PauseMenuManager : MonoBehaviour
     private CanvasGroup canvasGroup;
     private bool isPaused = false;
     public GameObject pauseMenuUI;
-
+    public Button resumeButton;
     void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
@@ -21,7 +23,7 @@ public class PauseMenuManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.JoystickButton11))
         {
             if (isPaused)
             {
@@ -46,11 +48,13 @@ public class PauseMenuManager : MonoBehaviour
         // Unlock the cursor for UI interaction
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        EventSystem.current.SetSelectedGameObject(resumeButton.gameObject);
+
     }
 
     public void ResumeGame()
     {
-        pauseMenuUI.SetActive(false);
+        pauseMenuUI.SetActive(true);
         isPaused = false;
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;

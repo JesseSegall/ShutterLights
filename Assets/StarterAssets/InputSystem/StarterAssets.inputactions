@@ -43,9 +43,9 @@
                 },
                 {
                     "name": "Pause",
-                    "type": "Button",
-                    "id": "6ee43c76-5b36-46a9-903b-de81739f1c61",
-                    "expectedControlType": "Button",
+                    "type": "PassThrough",
+                    "id": "15ac5743-9d8f-405c-bb29-25a69e215c07",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -318,7 +318,7 @@
                 },
                 {
                     "name": "",
-                    "id": "cf1577d0-a499-4e64-9fa4-372e4a6cf43c",
+                    "id": "dbe7964c-891f-4afb-a97d-e188944525a6",
                     "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
