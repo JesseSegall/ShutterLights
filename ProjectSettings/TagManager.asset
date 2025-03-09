@@ -8,6 +8,7 @@ TagManager:
   - Floating Platform
   - MovingPlatform
   - KillTrigger
+  - Indoors
   - Boss
   - theboss
   - Terrain
@@ -15,7 +16,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Indoors
   - Water
   - UI
   - whatIsGround
