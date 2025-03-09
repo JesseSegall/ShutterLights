@@ -47,6 +47,7 @@ Manifest:
 		i. button script: Assets/ScriptsBH/RestartGame.cs 
 	d. Made light bar persist across scenes
 		i. Assets/ScriptsBH/DontDestroy.cs
+	e. Added canvas called BossHealthBar to track health of boss
 
 2. Jesse
 
