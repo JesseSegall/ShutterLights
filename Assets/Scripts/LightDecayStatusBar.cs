@@ -65,4 +65,33 @@ public class LightDecayStatusBar : MonoBehaviour
         }
         // Optionally hide the game over screen if using a revival mechanic.
     }
+
+    public void GhostContact(float damageAmount)
+    {
+        timer += damageAmount; // Increase the decay timer
+        float ratio = Mathf.Clamp01(1 - (timer / decayDuration));
+
+        if (areaLight != null)
+        {
+            areaLight.intensity = initialIntensity * ratio;
+        }
+
+        if (lightStatusBar != null)
+        {
+            lightStatusBar.fillAmount = ratio;
+        }
+
+        // Check if light is fully depleted
+        if (ratio <= 0f && !gameOverTriggered)
+        {
+            areaLight.enabled = false;
+            gameOverTriggered = true;
+
+            if (youDiedManager != null)
+            {
+                youDiedManager.ShowYouDiedScreen();
+            }
+        }
+    }
+
 }

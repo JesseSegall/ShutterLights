@@ -12,19 +12,39 @@ public class GhostBehavior : MonoBehaviour
     public Transform[] waypoints;
     public float moveSpeed = 2f;
     public float chaseSpeed = 3f;
-    public float detectionRange = 2f;
-    public float stoppingDistance = 1f;
+    public float detectionRange = 5f;
+    public float stoppingDistance = 2f;
 
     private Transform player;
     private AIState state = AIState.Patrol;
     private int currentWaypointIndex = 0; 
     private Animator animator;
 
+    public AudioSource audioSource;
+    public AudioClip ghostAggro;
+    public AudioClip death;
+
+    private SkinnedMeshRenderer meshRenderer;
+
+    private bool hasPlayedChaseSound = false;
+
+    private bool isDying = false;
+
+
+
     void Start()
     {
         player = GameObject.FindWithTag("Player").transform; 
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
 
+        meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+
+        if (audioSource == null)
+    {
+        Debug.LogError("AudioSource is missing on " + gameObject.name);
+    }
+        
         if (waypoints.Length > 0)
         {
             transform.position = waypoints[0].position;
@@ -33,12 +53,18 @@ public class GhostBehavior : MonoBehaviour
 
     void Update()
     {
+        if (isDying) return;
         switch (state)
         {
             case AIState.Patrol:
                 Patrol();
                 break;
             case AIState.Chase:
+                if (!hasPlayedChaseSound) // Play sound only once per chase state
+            {
+                PlayChaseSound();
+                hasPlayedChaseSound = true;
+            }
                 ChasePlayer();
                 break;
         }
@@ -63,11 +89,15 @@ public class GhostBehavior : MonoBehaviour
         if (Vector3.Distance(transform.position, player.position) < detectionRange)
         {
             state = AIState.Chase;
+            hasPlayedChaseSound = false;
+            
+
         }
     }
 
     void ChasePlayer()
     {
+        
         float speed = chaseSpeed;
         MoveTowards(player.position, speed);
         animator.SetFloat("Speed", speed);
@@ -92,7 +122,46 @@ public class GhostBehavior : MonoBehaviour
     {
         if (other.CompareTag("Player")) 
         {
-            gameObject.SetActive(false); 
+            LightDecayStatusBar lightBar = other.GetComponentInChildren<LightDecayStatusBar>();
+            LightDecay lightArea = other.GetComponentInChildren<LightDecay>();
+            lightBar.GhostContact(2f);
+            lightArea.GhostContactAreaLight(2f);
+            isDying = true;
+            PlayDeathSound();
+            animator.SetTrigger("Death");
+            StartCoroutine(WaitForDeathAnimation());
         }
+    }
+
+    void PlayChaseSound(){
+        audioSource.PlayOneShot(ghostAggro);
+    }
+
+    void PlayDeathSound(){
+        audioSource.PlayOneShot(death);
+    }
+
+IEnumerator FadeOutGhost(float duration)
+    {
+        float elapsedTime = 0f;
+        Material material = meshRenderer.material;
+        Color startColor = material.color;
+
+        while (elapsedTime < duration)
+        {
+            float newAlpha = Mathf.Lerp(startColor.a, 0f, elapsedTime / duration);
+            material.color = new Color(startColor.r, startColor.g, startColor.b, newAlpha);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        material.color = new Color(startColor.r, startColor.g, startColor.b, 0f);
+        gameObject.SetActive(false);
+    }
+
+    IEnumerator WaitForDeathAnimation()
+    {
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        StartCoroutine(FadeOutGhost(1f)); 
     }
 }
