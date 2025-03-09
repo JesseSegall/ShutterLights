@@ -1,6 +1,6 @@
 Names: Bradley Hammond, Jesse Segall, Patrick Humberto Sandoval, Tao Deneb Quan
-Emails: bhammond33@gatech.edu, , , 
-Canvas account name: bhammond33, , , 
+Emails: bhammond33@gatech.edu, jsegall6@gatech.edu, , 
+Canvas account name: bhammond33, jsegall6, , 
 Start scene: StartScreen 
 
 How to play and what parts of the level to observe technology
@@ -10,11 +10,11 @@ Player controls are wasd on mouse and keyboard. Shift allows the player to run. 
 
 1. Player starts in the MainScene, player must travel into open cell door.
 2. Player will then transfer to Room_1.
-3. Player will oberve elevators with light orbs and green and red power ups. Collect orbs for effects. 
+3. Player will observe elevators with light orbs and green and red power ups. Collect orbs for effects. 
 White light orbs will replenish light meter.
 4. Traverse elevators, if you fall into the lava or spikes you will respawn at the last checkpoint. 
 5. At the end of the first room you will encounter an ai enemy ghost. The ghosts will chase you if you get too close.
-They will alert you will a sound when then aggro. If they collide with you the ghosts will die and steal your light. 
+They will alert you will a sound when they aggro. If they collide with you the ghosts will die and steal your light. 
 6. At the end of this scene there is a doorway that will bring you back to the main room.
 7. Have the player go up the stairs and into the big door for the final boss fight.
 8. Once in the boss room, the player must collect light orbs to damage the boss while dodging projectiles summoned by the boss
@@ -24,7 +24,7 @@ They will alert you will a sound when then aggro. If they collide with you the g
 
 Known problem areas
 1. Restart button does not work on you won screen
-2. Ghosts were orginally transparent, but when changing scenes it caused the alpha of the ghosts to decrease making them
+2. Ghosts were originally transparent, but when changing scenes it caused the alpha of the ghosts to decrease making them
 hard to see. Ghosts have been made opaque until I can debug the issue. 
 3. We cannot put rigid bodies on the player or NPC because they will fall through the floor. Therefore the ai does not have a navmesh. 
 
@@ -49,6 +49,23 @@ Manifest:
 		i. Assets/ScriptsBH/DontDestroy.cs
 
 2. Jesse
+	a. 3D modeling and design of Room_1
+		i. Created the layout of Room_1
+		ii. Utilized Probuilder to 3D model the Assets: Entrance, Lava_Floor, Spike Room, TrapBuildingTwo, Spike and Ceiling 
+		iii. Used prebuilt wall prefabs from the Prison Assets Pack to construct a maze with spike pits inside the Spike Room
+		iv. Used the column prefabs from the Prison Assets Pack to create the Pillar Jump Blocks as well as the Column Jump sections
+		v. Added Lava Area Light to simulate light emission from the lava floor. Light will only reflect off of items with default layer so it does not illuminate the inside of buildings.
+		vi. Added background music to the Main Room scene and Room_1 scene.
+	b. Checkpoint/Spawnpoint System
+		i. Checkpoint.cs and Spawnpoint.cs are two scripts that control spawning the player at the most recent checkpoint that has been crossed when the player dies. The spawn point script can be used to create a spawn point where ever needed.
+		ii. Added PlayerDeath.cs and PersistantObject.cs which attaches to the player. PlayerDeath will spawn the player at the most recent checkpoint on death, PersistantObject makes sure the player doesn't get destroyed when going between scenes.
+	c. Persist Player Across scenes
+		i. Created PlayerManager.cs script that handles spawning the player into a new scene as well as keeping track of current spawn points.
+	d. Moving Platforms
+		i. Created Platform prefabs that have a PlatformMovement.cs script attached to them
+		ii. The script will show a gizmo outlining the movement path. The Move distance, speed, and direction can be adjusted as well as the Phase Offset so the platforms can start at different positions.
+
+
 
 3. Patrick
 
