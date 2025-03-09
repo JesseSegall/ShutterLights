@@ -15,7 +15,7 @@ public class PlayerDeath : MonoBehaviour
     {
         if (other.gameObject.tag == "KillTrigger")
         {
-            RespawnAtCheckpoint();
+            TriggerDeath();
         }
     }
 
