@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public enum BossState {
     Throw,
@@ -22,17 +23,20 @@ public class BossBehavior : MonoBehaviour
     private bool isThrowing = false;
     private bool isDead = false;
     public GameObject youWinCanvas;
+    public Image healthBar;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
         animator = GetComponent<Animator>();
         StartCoroutine(IdleState());
+        UpdateHealthBar();
     }
 
     // Update is called once per frame
     void Update()
     {
+        UpdateHealthBar();
         if (isDead) return;
         if (bossHealth <= 0)
         {
@@ -101,7 +105,7 @@ public class BossBehavior : MonoBehaviour
 
 
     private void SpinState(){
-        MoveTowards(player.position, 1f);
+        MoveTowards(player.position, 4f);
         
 
         
@@ -128,6 +132,7 @@ public class BossBehavior : MonoBehaviour
             LightDecay lightArea = other.GetComponentInChildren<LightDecay>();
             lightBar.GhostContact(2f);
             lightArea.GhostContactAreaLight(2f);
+            UpdateHealthBar();
         }
     }
 
@@ -145,5 +150,10 @@ public class BossBehavior : MonoBehaviour
 
         Debug.Log("Boss has died!");
 
+    }
+
+    void UpdateHealthBar()
+    {
+            healthBar.fillAmount = bossHealth / 100f;
     }
 }
