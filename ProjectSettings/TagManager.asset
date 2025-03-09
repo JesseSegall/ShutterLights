@@ -9,6 +9,9 @@ TagManager:
   - MovingPlatform
   - KillTrigger
   - Indoors
+  - Boss
+  - theboss
+  - Terrain
   layers:
   - Default
   - TransparentFX

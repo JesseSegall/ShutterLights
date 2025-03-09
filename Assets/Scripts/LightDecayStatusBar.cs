@@ -68,7 +68,7 @@ public class LightDecayStatusBar : MonoBehaviour
 
     public void GhostContact(float damageAmount)
     {
-        timer += damageAmount; // Increase the decay timer
+        timer += damageAmount; 
         float ratio = Mathf.Clamp01(1 - (timer / decayDuration));
 
         if (areaLight != null)
@@ -81,7 +81,7 @@ public class LightDecayStatusBar : MonoBehaviour
             lightStatusBar.fillAmount = ratio;
         }
 
-        // Check if light is fully depleted
+        
         if (ratio <= 0f && !gameOverTriggered)
         {
             areaLight.enabled = false;
