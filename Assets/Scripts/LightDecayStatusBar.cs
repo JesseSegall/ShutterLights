@@ -9,7 +9,7 @@ public class LightDecayStatusBar : MonoBehaviour
     public Image lightStatusBar;
     public YouDiedScreenManager youDiedManager;
 
-    public Light areaLight;
+    // public Light areaLight;
     private float timer = 0f;
     private bool gameOverTriggered = false;
 
@@ -66,7 +66,7 @@ public class LightDecayStatusBar : MonoBehaviour
         {
             timer += damageAmount;
             float ratio = Mathf.Clamp01(1 - (timer / decayDuration));
-            areaLight.intensity = initialIntensity * ratio;
+            // areaLight.intensity = initialIntensity * ratio;
             lightStatusBar.fillAmount = ratio;
 
 

@@ -20,12 +20,6 @@ public class ElevatorStarter : MonoBehaviour
             ElevatorTriggered = true;
             Debug.Log("elevatorTriggered is " + ElevatorTriggered);
             LightDecayStatusBar statusBar = other.gameObject.GetComponentInChildren<LightDecayStatusBar>();
-            if(statusBar == null) {
-                Debug.Log("Status bar could not be found");
-            }
-            else {
-                Debug.Log("Status bar found");
-            }
             statusBar.decayDuration = 1000;
         }
         else
