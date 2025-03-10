@@ -69,6 +69,26 @@ Manifest:
 
 
 3. Patrick
+	a. Player Abilities
+		i. Created scripts to modify the characters jump height and speed
+		ii. Created the orbs that allow the player to gain these abilities
+		iii. Created ui elements to track these power ups and there duration
+		iv. Assisted with orb respawning and placement. 
+	b. UI elements
+		i. Created the pause ui elements, with buttons and functionality, allowing for restart, resume, and quit
+		ii. Created a light status bar that keeps track of our players health.
+	c. Player Design
+		i. Created player design using existing mesh. Added light source that demonstrates health.
+		ii. Created script that updates light based on players health.
+	c. Start and End Scene
+		i. Created the start scene when the game loads, adding art, music, and buttons to start the game
+		ii. Created the end scene that is displayed when the boss level is finished. With a restart button to start the game again.
+	d. Bug Fixes
+		i. Minor bug fixes such as player death and health reset
+		ii. Camera fixes so that it doesnt go through walls.
+	e. Design changes
+		i. Added design elements to improve play feel, such as a platform to show where the player can stand to load next scene
+		ii. Light orbs to guide the player to their destination.
 
 4. Tao
 	
