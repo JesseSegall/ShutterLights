@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public enum BossState {
     Throw,
@@ -144,9 +146,7 @@ public class BossBehavior : MonoBehaviour
         isDead = true;
         state = BossState.Death; 
         animator.SetTrigger("Death");
-        if (youWinCanvas != null) {
-            youWinCanvas.SetActive(true);
-        }
+        SceneManager.LoadScene("EndScene");
 
 
     }
