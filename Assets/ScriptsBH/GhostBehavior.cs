@@ -74,7 +74,7 @@ public class GhostBehavior : MonoBehaviour
 
         float speed = moveSpeed;
         MoveTowards(waypoints[currentWaypointIndex].position, speed);
-        animator.SetFloat("Speed", speed);
+       // animator.SetFloat("Speed", speed);
 
        
         if (Vector3.Distance(transform.position, waypoints[currentWaypointIndex].position) < stoppingDistance)
@@ -98,7 +98,7 @@ public class GhostBehavior : MonoBehaviour
         
         float speed = chaseSpeed;
         MoveTowards(player.position, speed);
-        animator.SetFloat("Speed", speed);
+        //animator.SetFloat("Speed", speed);
 
        
         if (Vector3.Distance(transform.position, player.position) > detectionRange * 1.5f)
@@ -120,10 +120,12 @@ public class GhostBehavior : MonoBehaviour
     {
         if (other.CompareTag("Player")) 
         {
+            Debug.LogError("Hit Player");
             LightDecayStatusBar lightBar = other.GetComponentInChildren<LightDecayStatusBar>();
             //LightDecay lightArea = other.GetComponentInChildren<LightDecay>();
             lightBar.GhostContact(2f);
             //lightArea.GhostContactAreaLight(2f);
+            Debug.LogError("Right before isDying");
             isDying = true;
             PlayDeathSound();
             animator.SetTrigger("Death");
@@ -136,6 +138,7 @@ public class GhostBehavior : MonoBehaviour
     }
 
     void PlayDeathSound(){
+        Debug.LogError("Reached PlayDeathSound");
         audioSource.PlayOneShot(death);
     }
 

@@ -129,7 +129,7 @@ public class BossBehavior : MonoBehaviour
         {
 
             LightDecayStatusBar lightBar = other.GetComponentInChildren<LightDecayStatusBar>();
-            LightDecay lightArea = other.GetComponentInChildren<LightDecay>();
+           // LightDecay lightArea = other.GetComponentInChildren<LightDecay>();
             lightBar.GhostContact(2f);
             //lightArea.GhostContactAreaLight(2f);
             UpdateHealthBar();
