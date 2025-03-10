@@ -1,6 +1,6 @@
 Names: Bradley Hammond, Jesse Segall, Patrick Humberto Sandoval, Tao Deneb Quan
-Emails: bhammond33@gatech.edu, jsegall6@gatech.edu, ,
-Canvas account name: bhammond33, jsegall6, ,
+Emails: bhammond33@gatech.edu, jsegall6@gatech.edu, , tquan8@gatech.edu
+Canvas account name: bhammond33, jsegall6, , tquan8
 Start scene: StartScreen
 
 How to play and what parts of the level to observe technology
