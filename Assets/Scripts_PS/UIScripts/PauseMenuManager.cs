@@ -19,6 +19,7 @@ public class PauseMenuManager : MonoBehaviour
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0f;
+        pauseMenuUI.SetActive(true);
     }
 
     void Update()
