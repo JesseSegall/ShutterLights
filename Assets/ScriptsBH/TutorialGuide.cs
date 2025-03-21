@@ -28,8 +28,6 @@ public class TutorialGuide : MonoBehaviour
     void Start()
     {
         ShowStep(currentStep);
-        //nextButton.onClick.AddListener(NextStep);
-        //exitButton.onClick.AddListener(Exit);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
@@ -84,12 +82,11 @@ public class TutorialGuide : MonoBehaviour
 
     IEnumerator UpdateArrowPosition()
     {
-        while (currentStep == 5)
+        while (currentStep == 5 && )
         {
-            // Convert world position of refillObject to UI space
             Vector3 screenPosition = Camera.main.WorldToScreenPoint(refillObject.position);
-            arrowPointer.transform.position = screenPosition + new Vector3(0, 50, 0); // Adjust Y offset if needed
-            yield return null; // Update every frame
+            arrowPointer.transform.position = screenPosition + new Vector3(0, 50, 0);
+            yield return null;
         }
     }
 }
