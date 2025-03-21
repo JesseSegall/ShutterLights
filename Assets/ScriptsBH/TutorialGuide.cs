@@ -82,7 +82,7 @@ public class TutorialGuide : MonoBehaviour
 
     IEnumerator UpdateArrowPosition()
     {
-        while (currentStep == 5 && )
+        while (currentStep == 5)
         {
             Vector3 screenPosition = Camera.main.WorldToScreenPoint(refillObject.position);
             arrowPointer.transform.position = screenPosition + new Vector3(0, 50, 0);
