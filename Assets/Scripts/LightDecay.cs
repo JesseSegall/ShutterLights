@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class LightDecay : MonoBehaviour
 {
-    public float initialIntensity = 5f;
+    public float initialIntensity = 20f;
     private Light areaLight;
     private float timer;
-    public float decayDuration = 15f;
+
     private LightDecayStatusBar lightDecayStatus; // Reference to the status bar
 
     private void Start()

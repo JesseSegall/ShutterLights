@@ -4,8 +4,8 @@ using UnityEngine.SceneManagement; // Required for scene reloading
 
 public class LightDecayStatusBar : MonoBehaviour
 {
-    public float initialIntensity = 5f;
-    public float decayDuration = 15f;
+
+    public float decayDuration = 30f;
     public Image lightStatusBar;
     public YouDiedScreenManager youDiedManager;
 
