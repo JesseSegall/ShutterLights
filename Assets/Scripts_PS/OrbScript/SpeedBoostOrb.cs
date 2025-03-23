@@ -25,6 +25,9 @@ public class SpeedBoostOrb : MonoBehaviour
     private Vector3 spawnPosition;
     private MeshRenderer meshRenderer;
     private Collider orbCollider;
+
+    public AudioClip speedSound; 
+    private AudioSource audioSource;
     
     private void Awake()
     {
@@ -51,6 +54,7 @@ public class SpeedBoostOrb : MonoBehaviour
         spawnPosition = transform.position;
         meshRenderer = GetComponent<MeshRenderer>();
         orbCollider = GetComponent<Collider>();
+        audioSource = gameObject.AddComponent<AudioSource>();
         
     }
 
@@ -72,6 +76,9 @@ public class SpeedBoostOrb : MonoBehaviour
                 // Store original speeds before applying boost
                 originalMoveSpeed = controller.MoveSpeed;
                 originalSprintSpeed = controller.SprintSpeed;
+
+                //play sound 
+                audioSource.PlayOneShot(speedSound);
                 
                 // Enable the boost status bar (it was hidden before)
                 if (boostStatusBar != null)

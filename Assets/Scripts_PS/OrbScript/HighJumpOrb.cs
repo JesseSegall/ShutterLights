@@ -20,6 +20,9 @@ public class HighJumpOrb : MonoBehaviour
     // Static variables to help prevent stacking boosts
     private static Coroutine currentBoostCoroutine;
     private static float originalJumpHeight;
+
+    public AudioClip jumpSound; 
+    private AudioSource audioSource;
     
 
     private void Start()
@@ -27,6 +30,7 @@ public class HighJumpOrb : MonoBehaviour
         spawnPosition = transform.position;
         meshRenderer = GetComponent<MeshRenderer>();
         orbCollider = GetComponent<Collider>();
+        audioSource = gameObject.AddComponent<AudioSource>();
         
     }
 
@@ -66,6 +70,9 @@ public class HighJumpOrb : MonoBehaviour
                 
                 // Store the player's original jump height before applying the boost
                 originalJumpHeight = controller.JumpHeight;
+
+                //play sound 
+                audioSource.PlayOneShot(jumpSound);
                 
                 // Enable the boost status bar (if assigned)
                 if (boostStatusBar != null)
