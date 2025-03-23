@@ -30,7 +30,7 @@ public class TutorialGuide : MonoBehaviour
         "That's it! Good luck!"
     };
 
-    private int currentStep = 0;
+    public int currentStep = 0;
 
     void Start()
     {
@@ -83,6 +83,7 @@ public class TutorialGuide : MonoBehaviour
     Cursor.visible = false;
     }
 
+
     void UpdateArrow()
      {
         GameObject target = null;
@@ -95,30 +96,35 @@ public class TutorialGuide : MonoBehaviour
         {
             Vector3 screenPosition = Camera.main.WorldToScreenPoint(target.transform.position);
 
-            if (screenPosition.z > 0) // In front of camera
+            if (screenPosition.z > 0)
             {
                 arrowPointer.SetActive(true);
 
-                // If it's a UI element with a RectTransform
                 RectTransform arrowRect = arrowPointer.GetComponent<RectTransform>();
                 if (arrowRect != null)
                 {
-                    arrowRect.position = screenPosition + new Vector3(0, 50, 0);
+                    arrowRect.position = screenPosition + new Vector3(0, 100, 0);
                 }
                 else
                 {
-                    // fallback for world-space pointer
-                    arrowPointer.transform.position = screenPosition + new Vector3(0, 50, 0);
+                    arrowPointer.transform.position = screenPosition + new Vector3(0, 100, 0);
                 }
             }
             else
             {
-                arrowPointer.SetActive(false); // behind camera
+                arrowPointer.SetActive(false);
             }
         }
         else
         {
             arrowPointer.SetActive(false);
         }
+    }
+
+    public static TutorialGuide Instance;
+
+    void Awake()
+    {
+        Instance = this;
     }
 }

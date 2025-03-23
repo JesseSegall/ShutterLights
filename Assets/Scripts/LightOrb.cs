@@ -8,12 +8,15 @@ public class LightOrb : MonoBehaviour
     private Vector3 spawnPosition;
     private MeshRenderer meshRenderer;
     private Collider orbCollider;
+    public AudioClip lightSound; 
+    private AudioSource audioSource;
 
      private void Start()
     {
         spawnPosition = transform.position;
         meshRenderer = GetComponent<MeshRenderer>();
         orbCollider = GetComponent<Collider>();
+        audioSource = gameObject.AddComponent<AudioSource>();
         
     }
 
@@ -31,6 +34,7 @@ public class LightOrb : MonoBehaviour
             }
                         // Destroy the orb so it can only be used once.
             StartCoroutine(RespawnOrb());
+            audioSource.PlayOneShot(lightSound);
             meshRenderer.enabled = false;
             orbCollider.enabled = false;
         }
