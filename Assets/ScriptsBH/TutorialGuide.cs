@@ -11,7 +11,9 @@ public class TutorialGuide : MonoBehaviour
     public Button nextButton;
     public Button exitButton;
     public GameObject arrowPointer; 
-    public Transform refillObject;
+    public GameObject refillObject;
+    public GameObject greenOrb;
+    public GameObject redOrb;
 
     private string[] tutorialSteps = {
         "Welcome to the game!",
@@ -20,6 +22,11 @@ public class TutorialGuide : MonoBehaviour
         "Press Space to jump.",
         "Notice your health bar is decreasing over time",
         "To refill your health bar collect light orbs",
+        "There are also power ups",
+        "Go collect the green orb",
+        "Notice your jump is much higher",
+        "Go collect the red orb",
+        "Notice you can now run faster",
         "That's it! Good luck!"
     };
 
@@ -32,26 +39,21 @@ public class TutorialGuide : MonoBehaviour
         Cursor.visible = true;
     }
 
+    void Update(){
+        UpdateArrow();
+    }
+
     void ShowStep(int step)
     {
         tutorialText.text = tutorialSteps[step];
-        if (step == 4)
-        {
-            arrowPointer.SetActive(true);
-        }
-        else if (step == 5)
-        {
-            arrowPointer.SetActive(true);
-            if (refillObject != null)
-            {
-                StartCoroutine(UpdateArrowPosition());
-            }
-        }
-        else
-        {
-            arrowPointer.SetActive(false);
-        }
-
+        //if (step == 4 || step == 5 || step == 7 || step == 9)
+        //{
+            //arrowPointer.SetActive(true);
+        //}
+        //else
+        //{
+           // arrowPointer.SetActive(false);
+        //}
     }
 
     public void NextStep()
@@ -68,6 +70,7 @@ public class TutorialGuide : MonoBehaviour
         {
             //hide the panel to end the tutorial
             tutorialPanel.SetActive(false);
+            arrowPointer.SetActive(false);
         }
     }
 
@@ -80,13 +83,42 @@ public class TutorialGuide : MonoBehaviour
     Cursor.visible = false;
     }
 
-    IEnumerator UpdateArrowPosition()
-    {
-        while (currentStep == 5)
+    void UpdateArrow()
+     {
+        GameObject target = null;
+
+        if (currentStep == 5) target = refillObject;
+        else if (currentStep == 7) target = greenOrb;
+        else if (currentStep == 9) target = redOrb;
+
+        if (target != null && target.activeInHierarchy)
         {
-            Vector3 screenPosition = Camera.main.WorldToScreenPoint(refillObject.position);
-            arrowPointer.transform.position = screenPosition + new Vector3(0, 50, 0);
-            yield return null;
+            Vector3 screenPosition = Camera.main.WorldToScreenPoint(target.transform.position);
+
+            if (screenPosition.z > 0) // In front of camera
+            {
+                arrowPointer.SetActive(true);
+
+                // If it's a UI element with a RectTransform
+                RectTransform arrowRect = arrowPointer.GetComponent<RectTransform>();
+                if (arrowRect != null)
+                {
+                    arrowRect.position = screenPosition + new Vector3(0, 50, 0);
+                }
+                else
+                {
+                    // fallback for world-space pointer
+                    arrowPointer.transform.position = screenPosition + new Vector3(0, 50, 0);
+                }
+            }
+            else
+            {
+                arrowPointer.SetActive(false); // behind camera
+            }
+        }
+        else
+        {
+            arrowPointer.SetActive(false);
         }
     }
 }
