@@ -115,6 +115,8 @@ MonoBehaviour:
   boostDuration: 15
   animSpeedMultiplier: 1.2
   boostStatusBar: {fileID: 0}
+  respawnTime: 5
+  speedSound: {fileID: 8300000, guid: 4e1ff8faed12a475eba9be0e46072269, type: 3}
 --- !u!1 &484911852212273549
 GameObject:
   m_ObjectHideFlags: 0
