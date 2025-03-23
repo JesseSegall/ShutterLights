@@ -112,3 +112,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boostTime: 5
   respawnTime: 5
+  lightSound: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}

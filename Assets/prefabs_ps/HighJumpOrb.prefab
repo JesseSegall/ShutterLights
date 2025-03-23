@@ -228,4 +228,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpMultiplier: 2
   boostDuration: 15
+  respawnTime: 5
   boostStatusBar: {fileID: 0}
+  jumpSound: {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
