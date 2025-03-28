@@ -1,59 +1,75 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class OrbShooter : MonoBehaviour
-{   // TODO: find sound for the orb being shot
-   // public AudioClip orbShot;
+{
+    [Header("Orb Settings")]
+
     public GameObject orbPrefab;
-    public Transform orbSpawn;
 
-    public float orbSpeed = 7f;
 
-    public Vector3 orbDirection = Vector3.forward;
+    public Transform spawnPoint;
+
+    [Tooltip("Impulse speed for the orb.")]
+    public float orbSpeed = 10f;
+
+    [Header("Firing Interval")]
+
     public float minShootInterval = 1f;
+
+
     public float maxShootInterval = 3f;
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
+        // Start a repeating coroutine to shoot at random intervals
         StartCoroutine(ShootRoutine());
     }
-    IEnumerator ShootRoutine()
+
+    private IEnumerator ShootRoutine()
     {
         while (true)
         {
-            // Wait for a random interval
-            float interval = Random.Range(minShootInterval, maxShootInterval);
-            // Yield tells unity to pause the func and it resumes after interval amount of seconds
-            yield return new WaitForSeconds(interval);
+            // Pick a random time to wait before shooting
+            float waitTime = Random.Range(minShootInterval, maxShootInterval);
+            yield return new WaitForSeconds(waitTime);
 
-
+            // Shoot an orb
             ShootOrb();
         }
     }
-    // Update is called once per frame
-    void ShootOrb()
+
+    private void ShootOrb()
     {
-        // Point the orb will spawn
-        Vector3 spawnPosition = orbSpawn != null ? orbSpawn.position : transform.position;
 
-        // Generate the orb
-        GameObject orb = Instantiate(orbPrefab, spawnPosition, Quaternion.identity);
-
-        // Get the orb's rigidbody
-        Rigidbody orbRigidbody = orb.GetComponentInChildren<Rigidbody>();
-
-        if (orbRigidbody != null)
+        if (orbPrefab == null)
         {
-            // Convert local direction to world space
-            Vector3 worldDirection = transform.TransformDirection(orbDirection.normalized);
-
-            // Apply force to shoot the orb
-            orbRigidbody.AddForce(worldDirection * orbSpeed, ForceMode.Impulse);
-
-            //  will prob change this so that it gets destroyed when it hits a wall instead.
-            Destroy(orb, 4f);
+            Debug.LogWarning("No orb prefab assigned to OrbShooter!");
+            return;
         }
-    }
+        if (spawnPoint == null)
+        {
+            Debug.LogWarning("No spawnPoint assigned to OrbShooter!");
+            return;
+        }
 
+        // Spawn the orb at the spawnPoint's position
+        GameObject orb = Instantiate(orbPrefab, spawnPoint.position, spawnPoint.rotation);
+
+
+        Rigidbody orbRb = orb.GetComponent<Rigidbody>();
+        if (orbRb != null)
+        {
+            // Add an impulse force in the direction of spawnPoint.forward
+            orbRb.AddForce(spawnPoint.forward * orbSpeed, ForceMode.Impulse);
+        }
+        else
+        {
+            Debug.LogWarning("The orb prefab does not have a Rigidbody!");
+        }
+
+        //TODO: Destroy if it hits wall or player instead of timed
+        Destroy(orb, 4f);
+    }
 }
