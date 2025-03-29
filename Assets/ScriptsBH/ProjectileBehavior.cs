@@ -15,7 +15,7 @@ public class ProjectileBehavior : MonoBehaviour
             Debug.Log("player collision");
             LightDecayStatusBar lightBar = collision.gameObject.GetComponentInChildren<LightDecayStatusBar>();
             LightDecay lightArea = collision.gameObject.GetComponentInChildren<LightDecay>();
-            lightBar.GhostContact(2f);
+            lightBar.DamageTaken(2f);
             //lightArea.GhostContactAreaLight(2f);
         }
 }

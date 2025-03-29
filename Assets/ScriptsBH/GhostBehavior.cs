@@ -123,7 +123,7 @@ public class GhostBehavior : MonoBehaviour
             Debug.LogError("Hit Player");
             LightDecayStatusBar lightBar = other.GetComponentInChildren<LightDecayStatusBar>();
             //LightDecay lightArea = other.GetComponentInChildren<LightDecay>();
-            lightBar.GhostContact(2f);
+            lightBar.DamageTaken(2f);
             //lightArea.GhostContactAreaLight(2f);
             Debug.LogError("Right before isDying");
             isDying = true;

@@ -62,7 +62,7 @@ public class LightDecayStatusBar : MonoBehaviour
         gameOverTriggered = false; // Allow revival if light is refilled
     }
 
-    public void GhostContact(float damageAmount)
+    public void DamageTaken(float damageAmount)
         {
             timer += damageAmount;
             float ratio = Mathf.Clamp01(1 - (timer / decayDuration));
