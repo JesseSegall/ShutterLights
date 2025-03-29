@@ -20,7 +20,7 @@ public class BossBehavior : MonoBehaviour
     public GameObject bossProjectile;
     private NavMeshAgent projectileAgent;
     private BossState state = BossState.Idle;
-    public int bossHealth = 100;
+    public float bossHealth = 100f;
     private Animator animator;
     private bool isThrowing = false;
     private bool isDead = false;
@@ -57,7 +57,7 @@ public class BossBehavior : MonoBehaviour
                 if(!isThrowing) {
                     StartCoroutine(ThrowState());
                 }
-            
+
             if (state != BossState.Spin && bossHealth > 50)
                 {
                     state = BossState.Idle;
@@ -67,13 +67,13 @@ public class BossBehavior : MonoBehaviour
             case BossState.Spin:
             SpinState();
             break;
-            
+
         }
     }
 
     private IEnumerator ThrowState()
     {
-        state = BossState.Throw; 
+        state = BossState.Throw;
         isThrowing = true;
         animator.SetTrigger("Throw");
         yield return new WaitForSeconds(3f);
@@ -85,7 +85,7 @@ public class BossBehavior : MonoBehaviour
         rb.velocity = direction * projectileSpeed;
         animator.ResetTrigger("Throw");
         isThrowing = false;
-    
+
         if (bossHealth <= 50)
         {
             state = BossState.Spin;
@@ -99,7 +99,7 @@ public class BossBehavior : MonoBehaviour
 
     private IEnumerator IdleState(){
         yield return new WaitForSeconds(1f);
-        if (state != BossState.Spin && !isThrowing) 
+        if (state != BossState.Spin && !isThrowing)
         {
             state = BossState.Throw;
         }
@@ -108,16 +108,16 @@ public class BossBehavior : MonoBehaviour
 
     private void SpinState(){
         MoveTowards(player.position, 4f);
-        
 
-        
+
+
     }
 
     void MoveTowards(Vector3 target, float speed)
     {
         animator.SetTrigger("Spinning");
         Vector3 ylessTarget = new Vector3(target.x, transform.position.y, target.z);
-    
+
         Vector3 direction = (ylessTarget - transform.position).normalized;
         transform.position += direction * speed * Time.deltaTime;
 
@@ -127,7 +127,7 @@ public class BossBehavior : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) 
+        if (other.CompareTag("Player"))
         {
 
             LightDecayStatusBar lightBar = other.GetComponentInChildren<LightDecayStatusBar>();
@@ -141,10 +141,10 @@ public class BossBehavior : MonoBehaviour
 
     private void OnDeath()
     {
-        if (isDead) return; 
+        if (isDead) return;
 
         isDead = true;
-        state = BossState.Death; 
+        state = BossState.Death;
         animator.SetTrigger("Death");
         SceneManager.LoadScene("EndScene");
 
