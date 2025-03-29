@@ -12,6 +12,7 @@ TagManager:
   - Boss
   - theboss
   - Terrain
+  - Wall
   layers:
   - Default
   - TransparentFX

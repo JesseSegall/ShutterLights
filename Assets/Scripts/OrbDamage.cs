@@ -14,5 +14,9 @@ public class OrbDamage : MonoBehaviour
             lightBar.DamageTaken(damageAmount);
             Destroy(gameObject);
         }
+        else if (other.CompareTag("Wall"))
+        {
+            Destroy(gameObject);
+        }
     }
 }
