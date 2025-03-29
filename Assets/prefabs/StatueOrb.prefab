@@ -98,7 +98,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.6
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &4398515496138906982
 SphereCollider:
@@ -109,7 +109,7 @@ SphereCollider:
   m_GameObject: {fileID: 357514079540583540}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -141,3 +141,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6faa5d6e174195e42b02cad92d86d57c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageAmount: 3
+  orbImpactSound: {fileID: 8300000, guid: 0a2b83c88cb7c9e458f56e43a6dd025a, type: 3}

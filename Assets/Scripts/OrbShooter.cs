@@ -17,12 +17,18 @@ public class OrbShooter : MonoBehaviour
 
     public float minShootInterval = 1f;
 
+    public AudioClip orbLaunchSound;
 
     public float maxShootInterval = 3f;
-
+    private AudioSource _audioSource;
     // Start is called before the first frame update
     private void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
+        if (_audioSource == null)
+        {
+            _audioSource = gameObject.AddComponent<AudioSource>();
+        }
         // Start a repeating coroutine to shoot at random intervals
         StartCoroutine(ShootRoutine());
     }
@@ -68,8 +74,11 @@ public class OrbShooter : MonoBehaviour
         {
             Debug.LogWarning("The orb prefab does not have a Rigidbody!");
         }
+        if (orbLaunchSound != null)
+        {
+            _audioSource.PlayOneShot(orbLaunchSound);
+        }
 
-        //TODO: Destroy if it hits wall or player instead of timed
-        Destroy(orb, 4f);
+
     }
 }
