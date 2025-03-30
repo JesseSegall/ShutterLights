@@ -6,6 +6,7 @@ public class ZombieHandCollider : MonoBehaviour
 {
     public int damageAmount = 2;
     private bool canDealDamage = true;
+    public AudioSource zombieHitClip;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,6 +17,8 @@ public class ZombieHandCollider : MonoBehaviour
             if (lightBar != null)
             {
                 lightBar.DamageTaken(damageAmount);
+                zombieHitClip.Play();
+                Debug.Log("Sound should play");
                 Debug.Log("Hand hit player for " + damageAmount + " damage!");
 
                 // Prevent multiple hits in rapid succession
