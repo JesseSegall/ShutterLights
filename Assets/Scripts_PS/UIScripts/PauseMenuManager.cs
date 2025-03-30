@@ -16,10 +16,11 @@ public class PauseMenuManager : MonoBehaviour
         canvasGroup = GetComponent<CanvasGroup>();
 
         // Ensure menu is hidden at start
+        pauseMenuUI.SetActive(true);
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0f;
-        pauseMenuUI.SetActive(true);
+        
     }
 
     void Update()
@@ -39,7 +40,7 @@ public class PauseMenuManager : MonoBehaviour
 
     public void PauseGame()
     {
-        pauseMenuUI.SetActive(true);
+        //pauseMenuUI.SetActive(true);
         isPaused = true;
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
@@ -55,7 +56,7 @@ public class PauseMenuManager : MonoBehaviour
 
     public void ResumeGame()
     {
-        pauseMenuUI.SetActive(false);
+        //pauseMenuUI.SetActive(false);
         isPaused = false;
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
@@ -63,8 +64,11 @@ public class PauseMenuManager : MonoBehaviour
         Time.timeScale = 1f;
 
         // Lock the cursor back if needed
+        if (!TutorialGuide.Instance.tutorialPanel.activeSelf)
+        {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        }
     }
         public void RestartGame()
     {

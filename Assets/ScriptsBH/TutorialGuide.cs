@@ -16,6 +16,7 @@ public class TutorialGuide : MonoBehaviour
     public GameObject redOrb;
     public GameObject areaLight;
     private LightDecayStatusBar script;
+    private bool tutorialVisible = true;
 
     private string[] tutorialSteps = {
         "Welcome to the game!",
@@ -35,9 +36,13 @@ public class TutorialGuide : MonoBehaviour
 
     public int currentStep = 0;
 
-    void Start()
+    IEnumerator Start()
     {   
-        if (PlayerPrefs.GetInt("FromStartScene", 0) == 1)
+        yield return null;
+        string spawnPointID = PlayerManager.Instance?.CurrentSpawnPointID;
+        Debug.Log("Spawn Point ID: " + spawnPointID);
+
+        if (spawnPointID == "SpawnPoint_MenuRespawn")
         {
             PlayerPrefs.DeleteKey("FromStartScene");
             ShowStep(currentStep);
@@ -64,7 +69,17 @@ public class TutorialGuide : MonoBehaviour
     void Update(){
         UpdateArrow();
         UpdateLightBar(script);
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+        ToggleTutorial();
+        }
     }
+
+    void ToggleTutorial(){
+        tutorialVisible = !tutorialVisible;
+        tutorialPanel.SetActive(tutorialVisible);
+    }
+
 
     void UpdateLightBar(MonoBehaviour script){
     //turn on lightbar decay when the right step has been reached
