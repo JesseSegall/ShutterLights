@@ -24,7 +24,7 @@ public class ZombieBehavior : MonoBehaviour
     [Header("Hand Collider Settings")]
     public GameObject handCollider;
     public float handColliderActivateTime = 0.3f;
-    public float handColliderDeactivateTime = 0.8f;
+    public float handColliderDeactivateTime = 0.3f;
 
     private Transform player;
     private ZombieState state = ZombieState.Idle;
@@ -122,12 +122,12 @@ public class ZombieBehavior : MonoBehaviour
         navAgent.isStopped = false;
         navAgent.SetDestination(player.position);
 
-        Vector3 targetDir = (player.position - transform.position).normalized;
-        if (targetDir != Vector3.zero)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(targetDir);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
-        }
+        // Vector3 targetDir = (player.position - transform.position).normalized;
+        // if (targetDir != Vector3.zero)
+        // {
+        //     Quaternion targetRotation = Quaternion.LookRotation(targetDir);
+        //     transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+        // }
     }
 
     IEnumerator AttackRoutine()
@@ -155,9 +155,9 @@ public class ZombieBehavior : MonoBehaviour
             yield return new WaitForSeconds(ATTACK_ANIMATION_DURATION - handColliderDeactivateTime);
 
             // Make zombie look at player between attacks if they move
-            Vector3 lookPos = new Vector3(player.position.x, transform.position.y, player.position.z);
-            Quaternion targetRotation = Quaternion.LookRotation(lookPos - transform.position);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 0.1f);
+            // Vector3 lookPos = new Vector3(player.position.x, transform.position.y, player.position.z);
+            // Quaternion targetRotation = Quaternion.LookRotation(lookPos - transform.position);
+            // transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 0.1f);
         }
         animator.SetBool("isAttacking", false);
         animator.SetBool("isChasing", true); // Ensure chase animation is activated.
