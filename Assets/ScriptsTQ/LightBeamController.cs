@@ -17,7 +17,7 @@ public class LightBeamController : MonoBehaviour
     private BossLightOrb bossLightOrb;
     public GameObject bossObj;
     private BossBehavior boss;
-    private float damagePerSecond = 2f;
+    public float damagePerSecond = 2f;
     private float windUp = 0f;
     public float maxLengthScaling = 60f;
     public AudioSource audioSource;
