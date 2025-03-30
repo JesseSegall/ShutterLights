@@ -21,7 +21,9 @@ public class StartScreenManager : MonoBehaviour
     IEnumerator PlaySoundAndLoadScene()
     {
         startSound.Play(); // Play the sound effect
-        yield return new WaitForSeconds(startSound.clip.length); // Wait for the sound to finish
+        yield return new WaitForSeconds(startSound.clip.length);// Wait for the sound to finish
+        PlayerPrefs.SetInt("FromStartScene", 1);
+        PlayerPrefs.Save();
         SceneManager.LoadScene("MainScene"); // Load the next scene
     }
 }

@@ -14,12 +14,15 @@ public class TutorialGuide : MonoBehaviour
     public GameObject refillObject;
     public GameObject greenOrb;
     public GameObject redOrb;
+    public GameObject areaLight;
+    private LightDecayStatusBar script;
 
     private string[] tutorialSteps = {
         "Welcome to the game!",
         "Use WASD or Arrow keys to move.",
         "Use the mouse to look around.",
         "Press Space to jump.",
+        "Press Q to pause the game",
         "Notice your health bar is decreasing over time",
         "To refill your health bar collect light orbs",
         "There are also power ups",
@@ -27,21 +30,49 @@ public class TutorialGuide : MonoBehaviour
         "Notice your jump is much higher",
         "Go collect the red orb",
         "Notice you can now run faster",
-        "That's it! Good luck!"
+        "Enter level one by moving over the light orange portal at the end of the hallway"
     };
 
     public int currentStep = 0;
 
     void Start()
-    {
-        ShowStep(currentStep);
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+    {   
+        if (PlayerPrefs.GetInt("FromStartScene", 0) == 1)
+        {
+            PlayerPrefs.DeleteKey("FromStartScene");
+            ShowStep(currentStep);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            script = areaLight.GetComponent<LightDecayStatusBar>();
+
+            script.enabled = false;
+            float scaleFactor = Screen.height / 1080f;
+            tutorialText.fontSize = 60 * scaleFactor;
+
+            TMP_Text nextText = nextButton.GetComponentInChildren<TMP_Text>();
+            TMP_Text exitText = exitButton.GetComponentInChildren<TMP_Text>();
+
+            if (nextText != null) nextText.fontSize = 60 * scaleFactor;
+            if (exitText != null) exitText.fontSize = 60 * scaleFactor;
+            }
+        else {
+            tutorialPanel.SetActive(false);
+            this.enabled = false;
+        }
     }
 
     void Update(){
         UpdateArrow();
+        UpdateLightBar(script);
     }
+
+    void UpdateLightBar(MonoBehaviour script){
+    //turn on lightbar decay when the right step has been reached
+        if (currentStep == 5) {
+            script.enabled = true;
+        }
+    }
+
 
     void ShowStep(int step)
     {
@@ -88,9 +119,9 @@ public class TutorialGuide : MonoBehaviour
      {
         GameObject target = null;
 
-        if (currentStep == 5) target = refillObject;
-        else if (currentStep == 7) target = greenOrb;
-        else if (currentStep == 9) target = redOrb;
+        if (currentStep == 6) target = refillObject;
+        else if (currentStep == 8) target = greenOrb;
+        else if (currentStep == 10) target = redOrb;
 
         if (target != null && target.activeInHierarchy)
         {
