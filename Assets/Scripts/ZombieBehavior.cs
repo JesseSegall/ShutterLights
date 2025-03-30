@@ -12,8 +12,7 @@ public enum ZombieState {
 public class ZombieBehavior : MonoBehaviour
 {
     [Header("Chase Settings")]
-
-    // TODO:  Can possible remove this since its using root motion and I dont think chase speed overrides that
+    // TODO:  Can possibly remove this since its using root motion and I dont think chase speed overrides that
     public float chaseSpeed = 0.5f;
     public float detectionRange = 4f;
     // Not sure why but if nav stop dist is <= 1 it won't stop so attack range must be over 1
@@ -21,10 +20,9 @@ public class ZombieBehavior : MonoBehaviour
 
     private readonly float ATTACK_ANIMATION_DURATION = 1.1f;
 
-    [Header("Hand Collider Settings")]
-    public GameObject handCollider;
-    public float handColliderActivateTime = 0.3f;
-    public float handColliderDeactivateTime = 0.3f;
+    [Header("Other Settings")]
+
+    public float maxAggroDelay = 3f;
 
     private Transform player;
     private ZombieState state = ZombieState.Idle;
@@ -34,6 +32,9 @@ public class ZombieBehavior : MonoBehaviour
     private bool hasPlayedChaseSound = false;
     private NavMeshAgent navAgent;
     private bool isAttacking = false;
+
+    private float aggroDelay;
+    private float spawnTime;
 
     void Start()
     {
@@ -46,11 +47,9 @@ public class ZombieBehavior : MonoBehaviour
         // Must make sure attack range is the same as nav stop distance
         navAgent.stoppingDistance = attackRange;
 
-
-        if (handCollider != null)
-        {
-            handCollider.SetActive(false);
-        }
+        // Make some random delay so when in a pack they all dont have exact same animation times
+        aggroDelay = Random.Range(0f, maxAggroDelay);
+        spawnTime = Time.time;
 
         if (audioSource == null)
         {
@@ -61,8 +60,6 @@ public class ZombieBehavior : MonoBehaviour
     void Update()
     {
         float distance = Vector3.Distance(transform.position, player.position);
-        // Debug.Log("Distance to player: " + distance + ", Attack Range: " + attackRange +
-        //           ", Stopping Distance: " + navAgent.stoppingDistance);
 
         if (isAttacking)
             return;
@@ -80,10 +77,12 @@ public class ZombieBehavior : MonoBehaviour
 
     void HandleIdleState(float distance)
     {
+        Debug.Log("Idle State: distance = " + distance + ", spawnTime + aggroDelay = " + (spawnTime + aggroDelay) + ", Time.time = " + Time.time);
+
         navAgent.isStopped = true;
         animator.SetBool("isChasing", false);
 
-        if (distance < detectionRange)
+        if (distance < detectionRange && Time.time >= spawnTime + aggroDelay)
         {
             state = ZombieState.Chase;
             if (!hasPlayedChaseSound && zombieAggro != null)
@@ -101,6 +100,8 @@ public class ZombieBehavior : MonoBehaviour
         {
             state = ZombieState.Idle;
             hasPlayedChaseSound = false;
+            spawnTime = Time.time;
+            aggroDelay = Random.Range(1f, maxAggroDelay);
             return;
         }
 
@@ -108,7 +109,7 @@ public class ZombieBehavior : MonoBehaviour
         if (distance <= attackRange)
         {
             navAgent.isStopped = true;
-            // Rotate to face the player. Might need to adjust this somehow so its not so abrupt
+            // Rotate to face the player.
             Vector3 lookPos = new Vector3(player.position.x, transform.position.y, player.position.z);
             transform.LookAt(lookPos);
 
@@ -117,76 +118,50 @@ public class ZombieBehavior : MonoBehaviour
             return;
         }
 
-
         animator.SetBool("isChasing", true);
         navAgent.isStopped = false;
         navAgent.SetDestination(player.position);
-
-        // Vector3 targetDir = (player.position - transform.position).normalized;
-        // if (targetDir != Vector3.zero)
-        // {
-        //     Quaternion targetRotation = Quaternion.LookRotation(targetDir);
-        //     transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
-        // }
     }
 
     IEnumerator AttackRoutine()
     {
         Debug.Log("In attack routine");
         isAttacking = true;
-
         animator.SetBool("isAttacking", true);
+
+
 
         // Continuously attack while the player is within range.
         while (Vector3.Distance(transform.position, player.position) <= attackRange)
         {
             // Restart the attack animation from the beginning.
             animator.Play("Attack", 0, 0f);
+            // Wait for the full duration of the attack animation.
+            yield return new WaitForSeconds(ATTACK_ANIMATION_DURATION);
 
-            // Wait until it's time to activate the hand collider.
-            yield return new WaitForSeconds(handColliderActivateTime);
-            ActivateHandCollider();
-
-            // Wait until it's time to deactivate the hand collider.
-            yield return new WaitForSeconds(handColliderDeactivateTime - handColliderActivateTime);
-            DeactivateHandCollider();
-
-            // Wait out the remainder of the attack animation.
-            yield return new WaitForSeconds(ATTACK_ANIMATION_DURATION - handColliderDeactivateTime);
-
-            // Make zombie look at player between attacks if they move
+            // This is causing some weird issues so commented out for now
             // Vector3 lookPos = new Vector3(player.position.x, transform.position.y, player.position.z);
             // Quaternion targetRotation = Quaternion.LookRotation(lookPos - transform.position);
             // transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 0.1f);
         }
+
+        // When the player moves out of range, exit attack state.
         animator.SetBool("isAttacking", false);
-        animator.SetBool("isChasing", true); // Ensure chase animation is activated.
+        animator.SetBool("isChasing", true);
         state = ZombieState.Chase;
         navAgent.isStopped = false;
         isAttacking = false;
+
+
         Debug.Log("Switching to Chase state");
     }
-    // Have these so the collider only active when zombie is swinging at player so ideally they dont take damage by just running into the hand.
-    void ActivateHandCollider()
-    {
-        if (handCollider != null)
-        {
-            handCollider.SetActive(true);
-        }
-    }
 
-    void DeactivateHandCollider()
-    {
-        if (handCollider != null)
-        {
-            handCollider.SetActive(false);
-        }
-    }
+
 
     // Some gizmos to visualize the ranges
     private void OnDrawGizmos()
     {
-       // Detection range gizmo
+        // Detection range gizmo
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
 
@@ -194,7 +169,7 @@ public class ZombieBehavior : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
 
-        // Stop range gizmo though you wont see this since it should be the same as the attack range
+        // Stop range gizmo (should be the same as attack range)
         if (navAgent != null)
         {
             Gizmos.color = Color.green;

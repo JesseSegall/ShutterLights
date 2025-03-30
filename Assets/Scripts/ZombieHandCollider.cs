@@ -31,7 +31,7 @@ public class ZombieHandCollider : MonoBehaviour
     {
         canDealDamage = false;
         // Wait for len of animation so hand doesnt cause dam when not in animation
-        yield return new WaitForSeconds(1.1f);
+        yield return new WaitForSeconds(1.0f);
         canDealDamage = true;
     }
 }
