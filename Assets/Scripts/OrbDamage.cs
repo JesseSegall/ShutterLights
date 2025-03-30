@@ -1,21 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class OrbDamage : MonoBehaviour
 {
     public float damageAmount = 3f;
     public AudioClip orbImpactSound;
-    // private AudioSource _audioSource;
-
-    // private void Start()
-    // {
-    //     _audioSource = GetComponent<AudioSource>();
-    //     if (_audioSource == null)
-    //     {
-    //         _audioSource = gameObject.AddComponent<AudioSource>();
-    //     }
-    // }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
