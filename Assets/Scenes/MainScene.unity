@@ -2551,7 +2551,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 271262021}
-  - component: {fileID: 271262020}
+  - component: {fileID: 271262022}
   m_Layer: 0
   m_Name: TutorialManager
   m_TagString: Untagged
@@ -2559,7 +2559,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &271262020
+--- !u!4 &271262021
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271262019}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 600, y: 150, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 49
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &271262022
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2579,22 +2594,8 @@ MonoBehaviour:
   refillObject: {fileID: 564798413}
   greenOrb: {fileID: 1860726237}
   redOrb: {fileID: 1926181001}
+  areaLight: {fileID: 1430767283}
   currentStep: 0
---- !u!4 &271262021
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 271262019}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 600, y: 150, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 49
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &272056495
 GameObject:
   m_ObjectHideFlags: 0
@@ -3542,7 +3543,6 @@ GameObject:
   - component: {fileID: 460882915}
   - component: {fileID: 460882914}
   - component: {fileID: 460882913}
-  - component: {fileID: 460882916}
   m_Layer: 5
   m_Name: TutorialPanel
   m_TagString: Untagged
@@ -3624,27 +3624,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 460882911}
   m_CullTransparentMesh: 1
---- !u!114 &460882916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 460882911}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e9fab57d4e7cea4daa0837b51cfdfef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tutorialPanel: {fileID: 460882911}
-  tutorialText: {fileID: 804507216}
-  nextButton: {fileID: 466646573}
-  exitButton: {fileID: 1891650352}
-  arrowPointer: {fileID: 893558983}
-  refillObject: {fileID: 564798413}
-  greenOrb: {fileID: 1860726237}
-  redOrb: {fileID: 1926181001}
-  currentStep: 0
 --- !u!1 &461420286
 GameObject:
   m_ObjectHideFlags: 0
@@ -22879,7 +22858,7 @@ PrefabInstance:
     - target: {fileID: 4143215813903997678, guid: 9355da42ff50a7b4caeb5265b27669db,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 400
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 4143215813903997678, guid: 9355da42ff50a7b4caeb5265b27669db,
         type: 3}
@@ -28824,12 +28803,12 @@ PrefabInstance:
     - target: {fileID: 4143215813903997678, guid: 9355da42ff50a7b4caeb5265b27669db,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -210.7
+      value: -210.70001
       objectReference: {fileID: 0}
     - target: {fileID: 4143215813903997678, guid: 9355da42ff50a7b4caeb5265b27669db,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 12.4
+      value: 12.400024
       objectReference: {fileID: 0}
     - target: {fileID: 4143215813903997678, guid: 9355da42ff50a7b4caeb5265b27669db,
         type: 3}
@@ -31472,7 +31451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2709e68311f14940b68b1b825011b6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepToTrigger: 5
+  stepToTrigger: 6
 --- !u!1001 &1136977764
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46275,7 +46254,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 460882916}
+      objectReference: {fileID: 271262022}
     - target: {fileID: 2794206952430651421, guid: add6404187e374c4a8f3cad4d30f401b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -51449,7 +51428,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 460882916}
+      objectReference: {fileID: 271262022}
     - target: {fileID: 2794206952430651421, guid: add6404187e374c4a8f3cad4d30f401b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -56010,7 +55989,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2709e68311f14940b68b1b825011b6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepToTrigger: 7
+  stepToTrigger: 8
 --- !u!1 &1868976264
 GameObject:
   m_ObjectHideFlags: 0
@@ -58028,7 +58007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2709e68311f14940b68b1b825011b6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepToTrigger: 9
+  stepToTrigger: 10
 --- !u!1 &1955783600
 GameObject:
   m_ObjectHideFlags: 0
