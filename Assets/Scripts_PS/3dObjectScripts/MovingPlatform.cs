@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MovingPlatformParent : MonoBehaviour
+public class MovingPlatform : MonoBehaviour
 {
     void OnCollisionEnter(Collision collision)
     {
