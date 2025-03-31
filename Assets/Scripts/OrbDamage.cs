@@ -17,15 +17,15 @@ public class OrbDamage : MonoBehaviour
 
             }
             AudioSource.PlayClipAtPoint(orbImpactSound, transform.position);
-            Debug.Log("Sound clip should play");
+            // Debug.Log("Sound clip should play");
 
 
             Destroy(gameObject);
-            Debug.Log("Orb should be destroyed ");
+            // Debug.Log("Orb should be destroyed ");
         }
         else if (other.CompareTag("Wall"))
         {
-            Debug.Log("Wall hit by Orb");
+            // Debug.Log("Wall hit by Orb");
             AudioSource.PlayClipAtPoint(orbImpactSound, transform.position);
             Destroy(gameObject);
         }
