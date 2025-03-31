@@ -16,12 +16,14 @@ public enum BossState {
 public class BossBehavior : MonoBehaviour
 {
 
+    public Transform orbFirePoint; 
     private Transform player;
     public GameObject bossProjectile;
     private NavMeshAgent projectileAgent;
     private BossState state = BossState.Idle;
     public float bossHealth = 100f;
     private Animator animator;
+    float projectileSpeed = 10f;
     private bool isThrowing = false;
     private bool isDead = false;
     public GameObject youWinCanvas;
@@ -35,11 +37,13 @@ public class BossBehavior : MonoBehaviour
         UpdateHealthBar();
     }
 
-    // Update is called once per frame
     void Update()
     {
         UpdateHealthBar();
         if (isDead) return;
+        
+        LookAtPlayer(3f); 
+        
         if (bossHealth <= 0)
         {
             OnDeath();
@@ -52,23 +56,38 @@ public class BossBehavior : MonoBehaviour
         switch(state)
         {
             case BossState.Idle:
-            break;
+                break;
             case BossState.Throw:
                 if(!isThrowing) {
                     StartCoroutine(ThrowState());
                 }
 
-            if (state != BossState.Spin && bossHealth > 50)
+                if (state != BossState.Spin && bossHealth > 50)
                 {
                     state = BossState.Idle;
                     StartCoroutine(IdleState());
                 }
-            break;
+                break;
             case BossState.Spin:
-            SpinState();
-            break;
-
+                SpinState();
+                break;
         }
+    }
+    public void ShootOrb()
+    {
+        if (isDead || bossHealth <= 0 || orbFirePoint == null) return;
+
+        Quaternion lookRotation = Quaternion.LookRotation(player.position - orbFirePoint.position);
+        GameObject newProjectile = Instantiate(bossProjectile, orbFirePoint.position, lookRotation);
+        Rigidbody rb = newProjectile.GetComponent<Rigidbody>();
+        if (player != null && rb != null)
+        {
+            Vector3 direction = (player.position - orbFirePoint.position).normalized;
+            float projectileSpeed = 30f;
+            rb.velocity = direction * projectileSpeed;
+        }
+
+        Debug.Log("Orb shot from orbFirePoint!");
     }
 
     private IEnumerator ThrowState()
@@ -95,7 +114,7 @@ public class BossBehavior : MonoBehaviour
             state = BossState.Idle;
             StartCoroutine(IdleState());
         }
-}
+    }
 
     private IEnumerator IdleState(){
         yield return new WaitForSeconds(1f);
@@ -111,6 +130,14 @@ public class BossBehavior : MonoBehaviour
 
 
 
+    }
+
+    void LookAtPlayer(float turnSpeed)
+    {
+        Vector3 direction = player.position - transform.position;
+        direction.y = 0; // Keeps boss upright, prevents tilting
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
     }
 
     void MoveTowards(Vector3 target, float speed)
