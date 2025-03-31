@@ -52,7 +52,7 @@ public class BossRoomLoader : MonoBehaviour
                 Debug.LogError("PlayerManager.Instance is null. Did you create the PlayerManager object in the Main scene? There should only be one.");
             }
             LightDecayStatusBar statusBar = other.gameObject.GetComponentInChildren<LightDecayStatusBar>();
-            statusBar.decayDuration = 15;
+            statusBar.decayDuration = 25;
 
             Debug.Log("Loading scene: " + destinationScene);
             SceneManager.LoadScene(destinationScene);
