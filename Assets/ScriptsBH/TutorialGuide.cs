@@ -73,6 +73,10 @@ public class TutorialGuide : MonoBehaviour
         {
         ToggleTutorial();
         }
+        if (currentStep >= tutorialSteps.Length) {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 
     void ToggleTutorial(){
