@@ -4,18 +4,27 @@ public class LightDecay : MonoBehaviour
 {
     public float initialIntensity = 20f;
     private Light areaLight;
-    private float timer;
-
-    private LightDecayStatusBar lightDecayStatus; // Reference to the status bar
+   // Singleton
+    private LightDecayStatusBar lightDecayStatus;
 
     private void Start()
     {
         areaLight = GetComponent<Light>();
-        lightDecayStatus = FindObjectOfType<LightDecayStatusBar>(); // Get the status bar script
+        // Use the singleton instance so we dont get dupes
+        lightDecayStatus = LightDecayStatusBar.Instance;
 
         if (areaLight != null)
         {
             areaLight.intensity = initialIntensity;
+        }
+
+        if (lightDecayStatus != null)
+        {
+            Debug.Log(" Found LightDecayStatusBar");
+        }
+        else
+        {
+            Debug.LogWarning(" LightDecayStatusBar not found in the scene.");
         }
     }
 
@@ -23,30 +32,25 @@ public class LightDecay : MonoBehaviour
     {
         if (areaLight != null && lightDecayStatus != null)
         {
-            // Sync intensity with the status bar's fill amount
             float ratio = lightDecayStatus.GetCurrentRatio();
             areaLight.intensity = initialIntensity * ratio;
 
             if (ratio <= 0f)
             {
-                areaLight.enabled = false; // Turn off the light when depleted
+                if (areaLight.enabled)
+                {
+                    Debug.Log(" Disabling area light.");
+                }
+                areaLight.enabled = false;
             }
             else
             {
-                areaLight.enabled = true; // Keep light active if bar isn't empty
+                if (!areaLight.enabled)
+                {
+                    Debug.Log(" Enabling area light.");
+                }
+                areaLight.enabled = true;
             }
         }
     }
-    //public void GhostContactAreaLight(float damageAmount)
-        //{
-            //timer += damageAmount;
-            //float ratio = Mathf.Clamp01(1 - (timer / decayDuration));
-
-            //areaLight.intensity = initialIntensity * ratio;
-
-            //if (ratio <= 0f)
-                //{
-                   // areaLight.enabled = false;
-                //}
-        //}
 }
