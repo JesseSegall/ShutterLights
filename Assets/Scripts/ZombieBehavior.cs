@@ -21,8 +21,7 @@ public class ZombieBehavior : MonoBehaviour
     private readonly float ATTACK_ANIMATION_DURATION = 1.1f;
 
     [Header("Other Settings")]
-
-    public float maxAggroDelay = 3f;
+    public float maxAggroDelay = 10f;
 
     private Transform player;
     private ZombieState state = ZombieState.Idle;
@@ -33,8 +32,10 @@ public class ZombieBehavior : MonoBehaviour
     private NavMeshAgent navAgent;
     private bool isAttacking = false;
 
+
     private float aggroDelay;
-    private float spawnTime;
+    //When player is detected, use -1 as default
+    private float detectionStartTime = -1f;
 
     void Start()
     {
@@ -48,8 +49,7 @@ public class ZombieBehavior : MonoBehaviour
         navAgent.stoppingDistance = attackRange;
 
         // Make some random delay so when in a pack they all dont have exact same animation times
-        aggroDelay = Random.Range(0f, maxAggroDelay);
-        spawnTime = Time.time;
+        aggroDelay = Random.Range(0.5f, maxAggroDelay);
 
         if (audioSource == null)
         {
@@ -72,36 +72,52 @@ public class ZombieBehavior : MonoBehaviour
             case ZombieState.Chase:
                 HandleChaseState(distance);
                 break;
+            case ZombieState.Attacking:
+                // Attacking is handled in the AttackRoutine coroutine.
+                break;
         }
     }
 
     void HandleIdleState(float distance)
     {
-        Debug.Log("Idle State: distance = " + distance + ", spawnTime + aggroDelay = " + (spawnTime + aggroDelay) + ", Time.time = " + Time.time);
-
         navAgent.isStopped = true;
         animator.SetBool("isChasing", false);
 
-        if (distance < detectionRange && Time.time >= spawnTime + aggroDelay)
+        if (distance < detectionRange)
         {
-            state = ZombieState.Chase;
-            if (!hasPlayedChaseSound && zombieAggro != null)
+            // When the player is first detected, start the delay timer.
+            if (detectionStartTime < 0f)
             {
-                audioSource.PlayOneShot(zombieAggro);
-                hasPlayedChaseSound = true;
+                detectionStartTime = Time.time;
             }
+            // If the delay has passed, transition to chase state.
+            if (Time.time >= detectionStartTime + aggroDelay)
+            {
+                state = ZombieState.Chase;
+                if (!hasPlayedChaseSound && zombieAggro != null)
+                {
+                    audioSource.PlayOneShot(zombieAggro);
+                    hasPlayedChaseSound = true;
+                }
+            }
+        }
+        else
+        {
+            // Reset the detection timer if the player leaves the detection range.
+            detectionStartTime = -1f;
         }
     }
 
     void HandleChaseState(float distance)
     {
-        // If the player gets too far out of detection range go back to idle state
+        // If the player gets too far, revert back to Idle state.
         if (distance > detectionRange * 1.5f)
         {
             state = ZombieState.Idle;
             hasPlayedChaseSound = false;
-            spawnTime = Time.time;
-            aggroDelay = Random.Range(1f, maxAggroDelay);
+            // Reset aggro delay and detection timer for future detections.
+            aggroDelay = Random.Range(0.3f, maxAggroDelay);
+            detectionStartTime = -1f;
             return;
         }
 
@@ -109,6 +125,7 @@ public class ZombieBehavior : MonoBehaviour
         if (distance <= attackRange)
         {
             navAgent.isStopped = true;
+            // TODO: Need to make this rotation more smooth
             // Rotate to face the player.
             Vector3 lookPos = new Vector3(player.position.x, transform.position.y, player.position.z);
             transform.LookAt(lookPos);
@@ -129,8 +146,6 @@ public class ZombieBehavior : MonoBehaviour
         isAttacking = true;
         animator.SetBool("isAttacking", true);
 
-
-
         // Continuously attack while the player is within range.
         while (Vector3.Distance(transform.position, player.position) <= attackRange)
         {
@@ -138,38 +153,30 @@ public class ZombieBehavior : MonoBehaviour
             animator.Play("Attack", 0, 0f);
             // Wait for the full duration of the attack animation.
             yield return new WaitForSeconds(ATTACK_ANIMATION_DURATION);
-
-            // This is causing some weird issues so commented out for now
-            // Vector3 lookPos = new Vector3(player.position.x, transform.position.y, player.position.z);
-            // Quaternion targetRotation = Quaternion.LookRotation(lookPos - transform.position);
-            // transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 0.1f);
         }
 
-        // When the player moves out of range, exit attack state.
+        // Exit the attack state when the player moves out of range.
         animator.SetBool("isAttacking", false);
         animator.SetBool("isChasing", true);
         state = ZombieState.Chase;
         navAgent.isStopped = false;
         isAttacking = false;
 
-
         Debug.Log("Switching to Chase state");
     }
 
-
-
-    // Some gizmos to visualize the ranges
+    // Gizmos to visualize detection and attack ranges.
     private void OnDrawGizmos()
     {
-        // Detection range gizmo
+        // Detection range gizmo.
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
 
-        // Attack Range gizmo
+        // Attack range gizmo.
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
 
-        // Stop range gizmo (should be the same as attack range)
+        // Stopping distance gizmo.
         if (navAgent != null)
         {
             Gizmos.color = Color.green;
