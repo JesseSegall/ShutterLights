@@ -17,6 +17,7 @@ public class TutorialGuide : MonoBehaviour
     public GameObject areaLight;
     private LightDecayStatusBar script;
     private bool tutorialVisible = true;
+    public bool tutorialOver = false;
 
     private string[] tutorialSteps = {
         "Welcome to the game!",
@@ -40,11 +41,12 @@ public class TutorialGuide : MonoBehaviour
     {   
         yield return null;
         string spawnPointID = PlayerManager.Instance?.CurrentSpawnPointID;
-        Debug.Log("Spawn Point ID: " + spawnPointID);
+        Debug.Log("Tutotrial Script: Spawn Point ID: " + spawnPointID);
 
-        if (spawnPointID == "SpawnPoint_MenuRespawn")
+        if (spawnPointID == "SpawnPoint_MenuRespawn" || string.IsNullOrEmpty(spawnPointID))
         {
             PlayerPrefs.DeleteKey("FromStartScene");
+            tutorialPanel.SetActive(true);
             ShowStep(currentStep);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -69,17 +71,17 @@ public class TutorialGuide : MonoBehaviour
     void Update(){
         UpdateArrow();
         UpdateLightBar(script);
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-        ToggleTutorial();
-        }
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //ToggleTutorial();
+        //}
         if (currentStep >= tutorialSteps.Length) {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
     }
 
-    void ToggleTutorial(){
+    public void ToggleTutorial(){
         tutorialVisible = !tutorialVisible;
         tutorialPanel.SetActive(tutorialVisible);
     }
@@ -121,6 +123,7 @@ public class TutorialGuide : MonoBehaviour
             //hide the panel to end the tutorial
             tutorialPanel.SetActive(false);
             arrowPointer.SetActive(false);
+            tutorialOver = true;
         }
     }
 
@@ -131,6 +134,7 @@ public class TutorialGuide : MonoBehaviour
     tutorialPanel.SetActive(false);
     Cursor.lockState = CursorLockMode.Locked;
     Cursor.visible = false;
+    tutorialOver = true;
     }
 
 

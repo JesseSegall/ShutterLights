@@ -7,13 +7,15 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(CanvasGroup))]
 public class PauseMenuManager : MonoBehaviour
 {
-    private CanvasGroup canvasGroup;
+    public CanvasGroup thecanvasGroup;
     private bool isPaused = false;
     public GameObject pauseMenuUI;
     public Button resumeButton;
+    private CanvasGroup canvasGroup;
+
     void Awake()
     {
-        canvasGroup = GetComponent<CanvasGroup>();
+        canvasGroup = thecanvasGroup.GetComponent<CanvasGroup>();
 
         // Ensure menu is hidden at start
         pauseMenuUI.SetActive(true);
@@ -47,6 +49,10 @@ public class PauseMenuManager : MonoBehaviour
         canvasGroup.alpha = 1f;
         Time.timeScale = 0f;
 
+        if (TutorialGuide.Instance.tutorialOver == false){
+            TutorialGuide.Instance.ToggleTutorial();
+        }
+
         // Unlock the cursor for UI interaction
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -62,6 +68,11 @@ public class PauseMenuManager : MonoBehaviour
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0f;
         Time.timeScale = 1f;
+
+        if (TutorialGuide.Instance.tutorialOver == false){
+            TutorialGuide.Instance.ToggleTutorial();
+        }
+        
 
         // Lock the cursor back if needed
         if (!TutorialGuide.Instance.tutorialPanel.activeSelf)
