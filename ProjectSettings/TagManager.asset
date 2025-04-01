@@ -14,6 +14,7 @@ TagManager:
   - Terrain
   - Wall
   - Collectible
+  - LightStatusBarUI
   layers:
   - Default
   - TransparentFX
