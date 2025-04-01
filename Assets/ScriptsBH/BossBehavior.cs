@@ -76,7 +76,7 @@ public class BossBehavior : MonoBehaviour
     public void ShootOrb()
     {
         if (isDead || bossHealth <= 0 || orbFirePoint == null) return;
-
+        Debug.Log("Firing Projectile");
         Quaternion lookRotation = Quaternion.LookRotation(player.position - orbFirePoint.position);
         GameObject newProjectile = Instantiate(bossProjectile, orbFirePoint.position, lookRotation);
         Rigidbody rb = newProjectile.GetComponent<Rigidbody>();

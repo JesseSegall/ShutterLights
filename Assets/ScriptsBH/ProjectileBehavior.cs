@@ -16,7 +16,12 @@ public class ProjectileBehavior : MonoBehaviour
             //lightArea.GhostContactAreaLight(2f);
         }
         if(collision.gameObject.CompareTag("Terrain")) {
-            Destroy(gameObject);
+            Invoke("DestroyProjectile", 1.0f);
         }
+    }
+
+    private void DestroyProjectile() {
+        Debug.Log("Destroying Projectile");
+        Destroy(gameObject);
     }
 }
