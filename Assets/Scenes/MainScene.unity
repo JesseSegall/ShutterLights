@@ -2595,6 +2595,7 @@ MonoBehaviour:
   greenOrb: {fileID: 1860726237}
   redOrb: {fileID: 1926181001}
   areaLight: {fileID: 1430767283}
+  tutorialOver: 0
   currentStep: 0
 --- !u!1 &272056495
 GameObject:
@@ -23789,7 +23790,7 @@ PrefabInstance:
     - target: {fileID: 3893294197879345259, guid: 64dce48905ffd9b4293e595fa6941544,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 112.73
+      value: 116.09
       objectReference: {fileID: 0}
     - target: {fileID: 3893294197879345259, guid: 64dce48905ffd9b4293e595fa6941544,
         type: 3}
@@ -23799,7 +23800,7 @@ PrefabInstance:
     - target: {fileID: 3893294197879345259, guid: 64dce48905ffd9b4293e595fa6941544,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 33.84
+      value: 37.45
       objectReference: {fileID: 0}
     - target: {fileID: 3893294197879345259, guid: 64dce48905ffd9b4293e595fa6941544,
         type: 3}
@@ -24476,6 +24477,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6260787561087831076, guid: bfd137618078b439b8c535e5bf57b8fd,
         type: 3}
+      propertyPath: canvasGroup
+      value: 
+      objectReference: {fileID: 2013302848}
+    - target: {fileID: 6260787561087831076, guid: bfd137618078b439b8c535e5bf57b8fd,
+        type: 3}
       propertyPath: pauseMenuUI
       value: 
       objectReference: {fileID: 578905378}
@@ -24484,6 +24490,11 @@ PrefabInstance:
       propertyPath: resumeButton
       value: 
       objectReference: {fileID: 578905379}
+    - target: {fileID: 6260787561087831076, guid: bfd137618078b439b8c535e5bf57b8fd,
+        type: 3}
+      propertyPath: thecanvasGroup
+      value: 
+      objectReference: {fileID: 2013302848}
     - target: {fileID: 6260787561087831077, guid: bfd137618078b439b8c535e5bf57b8fd,
         type: 3}
       propertyPath: m_Name
@@ -60393,6 +60404,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 41
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!225 &2013302848 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 3278968444454268659, guid: a77f974f80e644cb4a3c2cedae408923,
+    type: 3}
+  m_PrefabInstance: {fileID: 578905377}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2014405260
 GameObject:
   m_ObjectHideFlags: 0
