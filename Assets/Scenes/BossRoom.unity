@@ -798,7 +798,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &24864526
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1859,6 +1859,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 6271530495673938943, guid: f7482970250bc42bebef599e8cd6395b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Terrain
+      objectReference: {fileID: 0}
     - target: {fileID: 7394643890237800256, guid: f7482970250bc42bebef599e8cd6395b,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2330,7 +2335,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &203844587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8456,7 +8461,7 @@ MonoBehaviour:
   bossProjectile: {fileID: 1877908179}
   bossHealth: 100
   youWinCanvas: {fileID: 928882600}
-  healthBar: {fileID: 1811376068}
+  healthBar: {fileID: 1353059002}
 --- !u!1 &339332585
 GameObject:
   m_ObjectHideFlags: 0
@@ -13388,6 +13393,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 6271530495673938943, guid: f7482970250bc42bebef599e8cd6395b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Terrain
+      objectReference: {fileID: 0}
     - target: {fileID: 7394643890237800256, guid: f7482970250bc42bebef599e8cd6395b,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -17104,7 +17114,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -32}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1351197984
 MonoBehaviour:
@@ -17126,7 +17136,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Boss Health
+  m_text: The Stone Lord
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -17160,7 +17170,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -24686,6 +24696,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271530495673938943, guid: f7482970250bc42bebef599e8cd6395b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Terrain
       objectReference: {fileID: 0}
     - target: {fileID: 7394643890237800256, guid: f7482970250bc42bebef599e8cd6395b,
         type: 3}

@@ -5,15 +5,18 @@ using UnityEngine;
 public class ProjectileBehavior : MonoBehaviour
 {
     void OnCollisionEnter(Collision collision)
-{
-    if (collision.gameObject.CompareTag("Player")) 
+    {
+        if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("player collision");
+            // Debug.Log("player collision");
             LightDecayStatusBar lightBar = collision.gameObject.GetComponentInChildren<LightDecayStatusBar>();
             LightDecay lightArea = collision.gameObject.GetComponentInChildren<LightDecay>();
             lightBar.DamageTaken(2f);
             Destroy(gameObject);
             //lightArea.GhostContactAreaLight(2f);
         }
-}
+        if(collision.gameObject.CompareTag("Terrain")) {
+            Destroy(gameObject);
+        }
+    }
 }

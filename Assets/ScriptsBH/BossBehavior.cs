@@ -16,7 +16,7 @@ public enum BossState {
 public class BossBehavior : MonoBehaviour
 {
 
-    public Transform orbFirePoint; 
+    public Transform orbFirePoint;
     private Transform player;
     public GameObject bossProjectile;
     private NavMeshAgent projectileAgent;
@@ -41,9 +41,9 @@ public class BossBehavior : MonoBehaviour
     {
         UpdateHealthBar();
         if (isDead) return;
-        
-        LookAtPlayer(3f); 
-        
+
+        LookAtPlayer(3f);
+
         if (bossHealth <= 0)
         {
             OnDeath();
@@ -87,7 +87,7 @@ public class BossBehavior : MonoBehaviour
             rb.velocity = direction * projectileSpeed;
         }
 
-        Debug.Log("Orb shot from orbFirePoint!");
+        // Debug.Log("Orb shot from orbFirePoint!");
     }
 
     private IEnumerator ThrowState()
