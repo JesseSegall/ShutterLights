@@ -49,7 +49,7 @@ public class PauseMenuManager : MonoBehaviour
         canvasGroup.alpha = 1f;
         Time.timeScale = 0f;
 
-        if (TutorialGuide.Instance.tutorialOver == false){
+        if (TutorialGuide.Instance != null && !TutorialGuide.Instance.tutorialOver){
             TutorialGuide.Instance.ToggleTutorial();
         }
 
@@ -69,13 +69,13 @@ public class PauseMenuManager : MonoBehaviour
         canvasGroup.alpha = 0f;
         Time.timeScale = 1f;
 
-        if (TutorialGuide.Instance.tutorialOver == false){
+        if (TutorialGuide.Instance != null && !TutorialGuide.Instance.tutorialOver){
             TutorialGuide.Instance.ToggleTutorial();
         }
         
 
         // Lock the cursor back if needed
-        if (!TutorialGuide.Instance.tutorialPanel.activeSelf)
+        if (TutorialGuide.Instance == null || !TutorialGuide.Instance.tutorialPanel.activeSelf)
         {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
