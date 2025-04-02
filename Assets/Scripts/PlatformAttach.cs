@@ -15,15 +15,20 @@ public class PlatformAttach : MonoBehaviour
     // Little extra offset so its slightly above feet
     public float raycastOffset = 0.2f;
 
-    void Start()
+    void Awake()
     {
         _characterController = GetComponent<CharacterController>();
         if (_characterController == null)
         {
             Debug.LogError("CharacterController not found on this GameObject.");
         }
+        DetachIfAttached();
     }
 
+    void OnEnable()
+    {
+        DetachIfAttached();
+    }
     void Update()
     {
         
