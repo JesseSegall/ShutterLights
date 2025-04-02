@@ -318,7 +318,7 @@ namespace StarterAssets
                     if (_platformAttach != null)
                     {
                         _platformAttach.DetachIfAttached();
-                        Debug.Log("Detached from platform via jump.");
+                       // Debug.Log("Detached from platform via jump.");
                     }
                     // the square root of H * -2 * G = how much velocity needed to reach desired height
                     _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);

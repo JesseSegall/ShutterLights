@@ -12,7 +12,7 @@ public class LightDecayStatusBar : MonoBehaviour
 
     private float timer = 0f;
     private bool gameOverTriggered = false;
-    private float logTimer = 0f; // Log interval timer
+    
 
     private void Awake()
     {
@@ -122,7 +122,7 @@ public class LightDecayStatusBar : MonoBehaviour
         {
             lightStatusBar.fillAmount = 1f;
         }
-        Debug.Log("[LightDecayStatusBar] Light status bar has been reset to full.");
+        //Debug.Log("[LightDecayStatusBar] Light status bar has been reset to full.");
     }
 
     private void OnDestroy()

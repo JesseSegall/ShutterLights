@@ -1,13 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-public class PlatformAttach : MonoBehaviour {
-    [FormerlySerializedAs("Tag That Player Will Attach To")]
+public class PlatformAttach : MonoBehaviour
+{
+    
     public string[] tagsPlayerWillAttachTo;
 
     private CharacterController _characterController;
+    private Transform _currentPlatform;
+
+    // How far the ray will shoot from feet
+    public float raycastDistance = 1.2f;
+    // Little extra offset so its slightly above feet
+    public float raycastOffset = 0.2f;
 
     void Start()
     {
@@ -18,38 +24,66 @@ public class PlatformAttach : MonoBehaviour {
         }
     }
 
-    void OnControllerColliderHit(ControllerColliderHit hit)
+    void Update()
     {
-        // Check if the collided object has one of the allowed tags.
-        bool isAllowed = false;
-        foreach (string tag in tagsPlayerWillAttachTo)
+        
+
+        RaycastHit hit;
+        // Set the raycast origin slightly above the player's position.
+        Vector3 rayOrigin = transform.position + Vector3.up * raycastOffset;
+
+        // Cast a ray downward to detect the platform beneath the player.
+        if (Physics.Raycast(rayOrigin, Vector3.down, out hit, raycastDistance))
         {
-            if (hit.collider.CompareTag(tag))
+            bool isAllowed = false;
+            // Check if the hit collider has one of the allowed tags.
+            foreach (string tag in tagsPlayerWillAttachTo)
             {
-                isAllowed = true;
-                break;
+                if (hit.collider.CompareTag(tag))
+                {
+                    isAllowed = true;
+                    break;
+                }
+            }
+
+            if (isAllowed)
+            {
+                // Attach if not already attached to this platform.
+                if (transform.parent != hit.collider.transform)
+                {
+                    Debug.Log("Attaching to object: " + hit.collider.name);
+                    // keep our same world pos so its less janky movement
+                    transform.SetParent(hit.collider.transform, true);
+                    _currentPlatform = hit.collider.transform;
+                }
+            }
+            else
+            {
+                // Detach if the object hit is not a valid platform.
+                DetachIfAttached();
             }
         }
-
-        // Only attach if the object is allowed.
-        if (isAllowed)
+        else
         {
-            if (transform.parent != hit.collider.transform)
-            {
-                Debug.Log("Attaching to object: " + hit.collider.name);
-                transform.SetParent(hit.collider.transform);
-            }
+            // If nothing is hit, detach from any platform anyway.
+            DetachIfAttached();
         }
-
     }
-
 
     public void DetachIfAttached()
     {
         if (transform.parent != null)
         {
             Debug.Log("Detaching from: " + transform.parent.name);
-            transform.SetParent(null);
+            transform.SetParent(null, true);
+            _currentPlatform = null;
         }
+    }
+    void OnDrawGizmos()
+    {
+        // Just to see the ray
+        Vector3 rayOrigin = transform.position + Vector3.up * raycastOffset;
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(rayOrigin, rayOrigin + Vector3.down * raycastDistance);
     }
 }
