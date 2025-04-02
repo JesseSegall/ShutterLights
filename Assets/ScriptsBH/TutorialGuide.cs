@@ -37,11 +37,11 @@ public class TutorialGuide : MonoBehaviour
 
     public int currentStep = 0;
 
-    IEnumerator Start()
+    void Start()
     {   
-        yield return null;
         string spawnPointID = PlayerManager.Instance?.CurrentSpawnPointID;
         Debug.Log("Tutotrial Script: Spawn Point ID: " + spawnPointID);
+        script = areaLight.GetComponent<LightDecayStatusBar>();
 
         if (spawnPointID == "SpawnPoint_MenuRespawn" || string.IsNullOrEmpty(spawnPointID))
         {
@@ -50,7 +50,7 @@ public class TutorialGuide : MonoBehaviour
             ShowStep(currentStep);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            script = areaLight.GetComponent<LightDecayStatusBar>();
+            
 
             script.enabled = false;
             float scaleFactor = Screen.height / 1080f;
@@ -69,6 +69,11 @@ public class TutorialGuide : MonoBehaviour
     }
 
     void Update(){
+        //if (script != null && script.GetInstanceID() != 0) {
+        //UpdateLightBar(script);
+        //} else if (areaLight != null) {
+            //script = areaLight.GetComponent<LightDecayStatusBar>();
+        //}
         UpdateArrow();
         UpdateLightBar(script);
         //if (Input.GetKeyDown(KeyCode.Q))
@@ -90,6 +95,8 @@ public class TutorialGuide : MonoBehaviour
     void UpdateLightBar(MonoBehaviour script){
     //turn on lightbar decay when the right step has been reached
         if (currentStep == 5) {
+            Debug.Log("Script is null? " + (script == null));
+            Debug.Log("Script.gameObject is destroyed? " + (script != null && script.gameObject == null));
             script.enabled = true;
         }
     }
@@ -135,6 +142,9 @@ public class TutorialGuide : MonoBehaviour
     Cursor.lockState = CursorLockMode.Locked;
     Cursor.visible = false;
     tutorialOver = true;
+    if (!script.enabled){
+        script.enabled = true;
+    }
     }
 
 
