@@ -372,7 +372,7 @@ PrefabInstance:
     - target: {fileID: 2070925441746177912, guid: a1a802ecaf6775746bb2a929fb554ad8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.2990003
+      value: -4.299
       objectReference: {fileID: 0}
     - target: {fileID: 2070925441746177912, guid: a1a802ecaf6775746bb2a929fb554ad8,
         type: 3}
@@ -2194,7 +2194,7 @@ GameObject:
   - component: {fileID: 230383594}
   m_Layer: 0
   m_Name: ElevatorRoot
-  m_TagString: Untagged
+  m_TagString: Elevator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23454,7 +23454,7 @@ PrefabInstance:
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.2990003
+      value: -4.299
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
@@ -53905,7 +53905,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1713612541}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 362ba05032d8f4d1ea9b3d9577696278, type: 3}
   m_Name: 
@@ -53916,6 +53916,22 @@ MonoBehaviour:
   orbSpeed: 15
   orbAmmo: 0
   ammoText: {fileID: 1854956229}
+--- !u!114 &1713612571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713612541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20c02e895fd939d46a07c13847eaa3d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagsPlayerWillAttachTo:
+  - MovingPlatform
+  raycastDistance: 1.2
+  raycastOffset: 0.2
 --- !u!1 &1719208220
 GameObject:
   m_ObjectHideFlags: 0
@@ -55840,7 +55856,7 @@ GameObject:
   - component: {fileID: 1858148685}
   m_Layer: 0
   m_Name: ElevatorObj
-  m_TagString: Untagged
+  m_TagString: Elevator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

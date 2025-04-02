@@ -15,6 +15,7 @@ TagManager:
   - Wall
   - Collectible
   - LightStatusBarUI
+  - Elevator
   layers:
   - Default
   - TransparentFX
