@@ -23,7 +23,7 @@ public class BossBehavior : MonoBehaviour
     private BossState state = BossState.Idle;
     public float bossHealth = 100f;
     private Animator animator;
-    float projectileSpeed = 10f;
+    float projectileSpeed = 15f;
     private bool isThrowing = false;
     private bool isDead = false;
     public GameObject youWinCanvas;
@@ -73,35 +73,25 @@ public class BossBehavior : MonoBehaviour
                 break;
         }
     }
-    public void ShootOrb()
-    {
-        if (isDead || bossHealth <= 0 || orbFirePoint == null) return;
-
-        Quaternion lookRotation = Quaternion.LookRotation(player.position - orbFirePoint.position);
-        GameObject newProjectile = Instantiate(bossProjectile, orbFirePoint.position, lookRotation);
-        Rigidbody rb = newProjectile.GetComponent<Rigidbody>();
-        if (player != null && rb != null)
-        {
-            Vector3 direction = (player.position - orbFirePoint.position).normalized;
-            float projectileSpeed = 30f;
-            rb.velocity = direction * projectileSpeed;
-        }
-
-        // Debug.Log("Orb shot from orbFirePoint!");
-    }
 
     private IEnumerator ThrowState()
     {
         state = BossState.Throw;
         isThrowing = true;
         animator.SetTrigger("Throw");
-        yield return new WaitForSeconds(3f);
-        GameObject newProjectile = Instantiate(bossProjectile, transform.position + transform.forward * 12f + Vector3.up * 20f, Quaternion.identity);
-        newProjectile.GetComponent<MeshRenderer>().enabled = true;
+        // if (isDead || bossHealth <= 0 || orbFirePoint == null) return;
+        Debug.Log("Firing Projectile");
+        yield return new WaitForSeconds(2f);
+        Quaternion lookRotation = Quaternion.LookRotation(player.position - orbFirePoint.position);
+        GameObject newProjectile = Instantiate(bossProjectile, orbFirePoint.position, lookRotation);
         Rigidbody rb = newProjectile.GetComponent<Rigidbody>();
-        Vector3 direction = (player.transform.position - newProjectile.transform.position).normalized;
-        float projectileSpeed = 30f;
-        rb.velocity = direction * projectileSpeed;
+        if (player != null && rb != null)
+        {
+            Vector3 playerTarget = new Vector3(player.position.x, player.position.y + 2.0f, player.position.z);
+            Vector3 direction = (playerTarget - orbFirePoint.position).normalized;
+            rb.velocity = direction * projectileSpeed;
+        }
+        yield return new WaitForSeconds(1f);
         animator.ResetTrigger("Throw");
         isThrowing = false;
 
@@ -126,7 +116,7 @@ public class BossBehavior : MonoBehaviour
 
 
     private void SpinState(){
-        MoveTowards(player.position, 4f);
+        MoveTowards(player.position, 2f);
 
 
 
