@@ -31092,7 +31092,7 @@ GameObject:
   - component: {fileID: 1067978804}
   m_Layer: 8
   m_Name: CowboyRIO_Body
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -61345,7 +61345,7 @@ GameObject:
   - component: {fileID: 2024095925}
   m_Layer: 8
   m_Name: CowboyRIO_Hat
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
