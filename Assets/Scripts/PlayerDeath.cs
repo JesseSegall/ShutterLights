@@ -40,6 +40,18 @@ public class PlayerDeath : MonoBehaviour
             Debug.Log("Player Manager is null something went wrong!");
             return;
         }
+        // Before respawning, force detach the player from any platform
+        PlatformAttach platformAttach = GetComponent<PlatformAttach>();
+        if (platformAttach != null)
+        {
+            // Need this or else player will still be a child of platform if they fell and didnt hit jump
+            platformAttach.DetachIfAttached();
+            Debug.Log("Detached from platform via death script.");
+        }
+        else
+        {
+            Debug.LogWarning("No PlatformAttach component found on the player.");
+        }
 
         string spawnPointID = PlayerManager.Instance.CurrentSpawnPointID;
 

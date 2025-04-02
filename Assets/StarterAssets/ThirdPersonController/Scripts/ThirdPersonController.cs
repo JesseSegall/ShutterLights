@@ -99,6 +99,8 @@ namespace StarterAssets
         private int _animIDJump;
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
+        
+        private PlatformAttach _platformAttach;
 
 #if ENABLE_INPUT_SYSTEM 
         private PlayerInput _playerInput;
@@ -137,7 +139,11 @@ namespace StarterAssets
         private void Start()
         {
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-            
+            _platformAttach = GetComponent<PlatformAttach>();
+            if (_platformAttach == null)
+            {
+                Debug.LogError("No platform attach script is on the player.");
+            }
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
@@ -309,6 +315,11 @@ namespace StarterAssets
                 // Jump
                 if (_input.jump && _jumpTimeoutDelta <= 0.0f)
                 {
+                    if (_platformAttach != null)
+                    {
+                        _platformAttach.DetachIfAttached();
+                        Debug.Log("Detached from platform via jump.");
+                    }
                     // the square root of H * -2 * G = how much velocity needed to reach desired height
                     _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
 
