@@ -41,11 +41,10 @@ public class SpeedBoostOrb : MonoBehaviour
             }
         }
 
-        // Initialize the boost bar so it's empty and hidden at the start.
         if (boostStatusBar != null)
         {
-            boostStatusBar.fillAmount = 0;
-            boostStatusBar.gameObject.SetActive(false);
+            boostStatusBar.fillAmount = 0f;             
+            //boostStatusBar.gameObject.SetActive(false);   
         }
     }
 
@@ -138,7 +137,7 @@ public class SpeedBoostOrb : MonoBehaviour
         if (boostStatusBar != null)
         {
             boostStatusBar.fillAmount = 0;
-            boostStatusBar.gameObject.SetActive(false);
+            //boostStatusBar.gameObject.SetActive(false);
         }
         
         // Clear the boost coroutine flag.

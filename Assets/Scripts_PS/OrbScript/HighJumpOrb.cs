@@ -39,18 +39,18 @@ public class HighJumpOrb : MonoBehaviour
         // If the boostStatusBar isn't set in the Inspector, try to find it by name
         if (boostStatusBar == null)
         {
-            GameObject barObj = GameObject.Find("BoostStatusBar");
+            GameObject barObj = GameObject.Find("JumpStatusBar");
             if (barObj != null)
             {
                 boostStatusBar = barObj.GetComponent<Image>();
             }
         }
         
-        // Initialize the boost status bar so it is empty and hidden at the start.
+    
         if (boostStatusBar != null)
         {
-            boostStatusBar.fillAmount = 0;
-            boostStatusBar.gameObject.SetActive(false);
+            boostStatusBar.fillAmount = 0f;               
+            //boostStatusBar.gameObject.SetActive(false); 
         }
     }
     
@@ -114,7 +114,7 @@ public class HighJumpOrb : MonoBehaviour
         if (boostStatusBar != null)
         {
             boostStatusBar.fillAmount = 0;
-            boostStatusBar.gameObject.SetActive(false);
+            //boostStatusBar.gameObject.SetActive(false);
         }
         
         // Clear the boost coroutine reference
