@@ -41,7 +41,7 @@ public class TutorialGuide : MonoBehaviour
     {   
         string spawnPointID = PlayerManager.Instance?.CurrentSpawnPointID;
         Debug.Log("Tutotrial Script: Spawn Point ID: " + spawnPointID);
-        script = areaLight.GetComponent<LightDecayStatusBar>();
+        script = LightDecayStatusBar.Instance;
 
         if (spawnPointID == "SpawnPoint_MenuRespawn" || string.IsNullOrEmpty(spawnPointID))
         {
