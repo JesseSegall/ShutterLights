@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class TutorialGuide : MonoBehaviour
 {
@@ -10,7 +11,8 @@ public class TutorialGuide : MonoBehaviour
     public TMP_Text tutorialText;
     public Button nextButton;
     public Button exitButton;
-    public GameObject arrowPointer; 
+    public GameObject arrowPointer;
+    public GameObject wayPointOne;
     public GameObject refillObject;
     public GameObject greenOrb;
     public GameObject redOrb;
@@ -18,12 +20,18 @@ public class TutorialGuide : MonoBehaviour
     private LightDecayStatusBar script;
     private bool tutorialVisible = true;
     public bool tutorialOver = false;
+    private Dictionary<int, Func<bool>> delayConditions;
+    private HashSet<int> delayedSteps = new HashSet<int>();
+    private bool redOrbCollected = false;
+    private bool greenOrbCollected = false;
+    private Coroutine delayCoroutine = null;
+    
 
     private string[] tutorialSteps = {
         "Welcome to the game!",
-        "Use WASD or Arrow keys to move.",
+        "Use WASD or Arrow keys to move to the arrow",
         "Use the mouse to look around.",
-        "Press Space to jump.",
+        "Press Space to jump onto the elevator.",
         "Press Q to pause the game",
         "Notice your health bar is decreasing over time",
         "To refill your health bar collect light orbs",
@@ -48,8 +56,8 @@ public class TutorialGuide : MonoBehaviour
             PlayerPrefs.DeleteKey("FromStartScene");
             tutorialPanel.SetActive(true);
             ShowStep(currentStep);
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             
 
             script.enabled = false;
@@ -66,6 +74,17 @@ public class TutorialGuide : MonoBehaviour
             tutorialPanel.SetActive(false);
             this.enabled = false;
         }
+
+        delayConditions = new Dictionary<int, Func<bool>>()
+        {
+            { 2,  () => true },
+            { 4,  () => Input.GetKeyDown(KeyCode.Q) },
+            { 5,  () => true },
+            { 7,  () => true },
+            { 9,  () => Input.GetKeyDown(KeyCode.Space) && !greenOrb.GetComponent<MeshRenderer>().enabled},
+            { 11, () => (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && !redOrb.GetComponent<MeshRenderer>().enabled},
+            { tutorialSteps.Length - 1, () => true }
+        };
     }
 
     void Update(){
@@ -76,17 +95,44 @@ public class TutorialGuide : MonoBehaviour
         //}
         UpdateArrow();
         UpdateLightBar(script);
+        if (!tutorialOver && delayConditions.ContainsKey(currentStep) && !delayedSteps.Contains(currentStep) && delayCoroutine == null)
+            {
+                if (delayConditions[currentStep]())
+                {
+                    delayedSteps.Add(currentStep);
+                    delayCoroutine = StartCoroutine(DelayNextStep());
+                }
+            }
         //if (Input.GetKeyDown(KeyCode.Q))
         //{
         //ToggleTutorial();
         //}
-        if (currentStep >= tutorialSteps.Length) {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+        //if (currentStep >= tutorialSteps.Length) {
+            //Cursor.lockState = CursorLockMode.Locked;
+            //Cursor.visible = false;
+        //}
+        if (Input.GetKeyDown(KeyCode.E)){
+            if (delayCoroutine != null)
+                {
+                    StopCoroutine(delayCoroutine);
+                    delayCoroutine = null;
+                }
+            NextStep();
+        }
+        if (Input.GetKeyDown(KeyCode.X)){
+            Exit();
         }
     }
 
+    IEnumerator DelayNextStep(){
+        yield return new WaitForSeconds(2f);
+        delayCoroutine = null;
+        NextStep();
+    }
+
     public void ToggleTutorial(){
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         tutorialVisible = !tutorialVisible;
         tutorialPanel.SetActive(tutorialVisible);
     }
@@ -139,8 +185,8 @@ public class TutorialGuide : MonoBehaviour
     Debug.Log("Exit button clicked!");
     //hide the panel to end the tutorial
     tutorialPanel.SetActive(false);
-    Cursor.lockState = CursorLockMode.Locked;
-    Cursor.visible = false;
+    //Cursor.lockState = CursorLockMode.Locked;
+    //Cursor.visible = false;
     tutorialOver = true;
     if (!script.enabled){
         script.enabled = true;
@@ -153,6 +199,7 @@ public class TutorialGuide : MonoBehaviour
         GameObject target = null;
 
         if (currentStep == 6) target = refillObject;
+        else if (currentStep == 1) target = wayPointOne;
         else if (currentStep == 8) target = greenOrb;
         else if (currentStep == 10) target = redOrb;
 
