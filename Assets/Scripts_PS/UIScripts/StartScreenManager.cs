@@ -14,7 +14,7 @@ public class StartScreenManager : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene("MainScene"); // Load immediately if no sound
+            SceneManager.LoadScene("Transition Start To Main"); // Load immediately if no sound
         }
     }
 
@@ -24,6 +24,6 @@ public class StartScreenManager : MonoBehaviour
         yield return new WaitForSeconds(startSound.clip.length);// Wait for the sound to finish
         PlayerPrefs.SetInt("FromStartScene", 1);
         PlayerPrefs.Save();
-        SceneManager.LoadScene("MainScene"); // Load the next scene
+        SceneManager.LoadScene("Transition Start To Main"); // Load the next scene
     }
 }
