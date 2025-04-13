@@ -40,6 +40,7 @@ public class ElevatorLightOrb : MonoBehaviour
             audioSource.PlayOneShot(lightSound);
             meshRenderer.enabled = false;
             orbCollider.enabled = false;
+            ScoreManager.instance.AddScore(10);
         }
     }
 
