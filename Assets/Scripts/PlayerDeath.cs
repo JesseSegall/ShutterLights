@@ -29,6 +29,8 @@ public class PlayerDeath : MonoBehaviour
         {
             lightDecay.ResetLightStatusBar(); // Reset the light bar
         }
+        ScoreManager.instance.AddScore(-100);
+
 
         RespawnAtCheckpoint();
     }
