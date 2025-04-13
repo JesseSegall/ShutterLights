@@ -5694,7 +5694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f450d3abd5b792d469e08123add65c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destinationScene: Room_1
+  destinationScene: TransitionMainToRoom1
   destinationSpawnPointID: Room_1_Spawn
 --- !u!1001 &480627898
 PrefabInstance:

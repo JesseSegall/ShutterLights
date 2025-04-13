@@ -10,13 +10,19 @@ EditorBuildSettings:
     guid: 32949b5087efe41c1abb22ebee251863
   - enabled: 1
     path: Assets/Scenes/Transition Start to Main.unity
-    guid: a75b4681480480c46b0a0e97978879fd
+    guid: 151643322472acc47b1b753fb9487e69
   - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: 73946902ea7d5404794c58f6f19a8894
   - enabled: 1
+    path: Assets/Scenes/TransitionMainToRoom1.unity
+    guid: a75b4681480480c46b0a0e97978879fd
+  - enabled: 1
     path: Assets/Scenes/Room_1.unity
     guid: 72127f16b1711400092c1f534d146391
+  - enabled: 1
+    path: Assets/Scenes/TransitionRoom1ToMain.unity
+    guid: f592c208163c68e40b6164a59f1145ec
   - enabled: 1
     path: Assets/Scenes/BossRoom.unity
     guid: 1506908f40a4640e0ad621dd91c1b22f
