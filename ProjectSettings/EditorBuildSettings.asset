@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/StartScreen.unity
     guid: 32949b5087efe41c1abb22ebee251863
   - enabled: 1
+    path: Assets/Scenes/Transition Start to Main.unity
+    guid: a75b4681480480c46b0a0e97978879fd
+  - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: 73946902ea7d5404794c58f6f19a8894
   - enabled: 1

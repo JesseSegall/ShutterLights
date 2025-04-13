@@ -11,8 +11,16 @@ public class RoomLoaderTest : MonoBehaviour
 
     [Tooltip("ID of the spawn point to use in the destination scene")]
     public string destinationSpawnPointID = "FromMainRoom";
+    private GameObject player;
 
-
+    void Awake(){
+        StartCoroutine(FindPlayer());
+    }
+    
+    IEnumerator FindPlayer() {
+        yield return new WaitForSeconds(1f);
+        player = GameObject.FindWithTag("Player");
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -37,6 +45,7 @@ public class RoomLoaderTest : MonoBehaviour
             }
 
             Debug.Log("Loading scene: " + destinationScene);
+            DontDestroyOnLoad(player);
             SceneManager.LoadScene(destinationScene);
         }
         else
