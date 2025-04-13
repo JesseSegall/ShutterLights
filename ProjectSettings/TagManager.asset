@@ -16,6 +16,7 @@ TagManager:
   - Collectible
   - LightStatusBarUI
   - Elevator
+  - Zombie
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - Orb
   - PlayerSkin
   - Obstacle
-  - 
+  - Zombie
   - 
   - 
   - 

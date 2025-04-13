@@ -23,6 +23,7 @@ public class SpikeRoomZombieAudio : MonoBehaviour
         if (!_hasPlayed && other.CompareTag("Player"))
         {
             _audioSource.PlayOneShot(creepyZombieSound);
+            _hasPlayed = true;
         }
     }
 }
