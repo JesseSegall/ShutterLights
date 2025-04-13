@@ -35,6 +35,7 @@ public class LightOrb : MonoBehaviour
                         // Destroy the orb so it can only be used once.
             StartCoroutine(RespawnOrb());
             audioSource.PlayOneShot(lightSound);
+            ScoreManager.instance.AddScore(10);
             meshRenderer.enabled = false;
             orbCollider.enabled = false;
         }
