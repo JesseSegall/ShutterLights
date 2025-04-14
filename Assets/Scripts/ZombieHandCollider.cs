@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 public class ZombieHandCollider : MonoBehaviour
 {
-    public int damageAmount = 2;
+    public int damageAmount = 5;
     private bool _canDealDamage = true;
     public AudioSource handColliderAudioSource;
     public AudioClip[] playerDamageClips;
