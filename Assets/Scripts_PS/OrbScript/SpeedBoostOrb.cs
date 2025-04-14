@@ -17,8 +17,8 @@ public class SpeedBoostOrb : MonoBehaviour
 
     // Static variables to help prevent stacking boosts
     private static Coroutine currentBoostCoroutine;
-    private static float originalMoveSpeed;
-    private static float originalSprintSpeed;
+    private static float originalMoveSpeed = 2.0f;
+    private static float originalSprintSpeed = 5.335f;
 
     //Respawn orbs variables
     public float respawnTime = 5f;
@@ -55,7 +55,6 @@ public class SpeedBoostOrb : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();
         orbCollider = GetComponent<Collider>();
         audioSource = gameObject.AddComponent<AudioSource>();
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -69,13 +68,7 @@ public class SpeedBoostOrb : MonoBehaviour
                 if (currentBoostCoroutine != null)
                 {
                     controller.StopCoroutine(currentBoostCoroutine);
-                    controller.MoveSpeed = originalMoveSpeed;
-                    controller.SprintSpeed = originalSprintSpeed;
                 }
-
-                // Store original speeds before applying boost
-                originalMoveSpeed = controller.MoveSpeed;
-                originalSprintSpeed = controller.SprintSpeed;
 
                 //play sound
                 audioSource.PlayOneShot(speedSound);
