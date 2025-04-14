@@ -2559,6 +2559,7 @@ GameObject:
   - component: {fileID: 8048861431640922610}
   - component: {fileID: 7266513497122578391}
   - component: {fileID: 8135896346670352299}
+  - component: {fileID: -8281209478741479555}
   m_Layer: 0
   m_Name: Caged Zombie
   m_TagString: Zombie
@@ -2797,6 +2798,8 @@ MonoBehaviour:
   attackRange: 1.5
   blendDampTime: 0.1
   rotationSpeed: 5
+  audioSource: {fileID: 0}
+  zombieAggro: {fileID: 0}
 --- !u!114 &8135896346670352299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2809,6 +2812,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1a5fdf0e25fbc6418d44f4432731a6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &-8281209478741479555
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7165830649072764670}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.4
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &7659288101166658998
 GameObject:
   m_ObjectHideFlags: 0
@@ -3065,7 +3082,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 2
-  zombieHitClip: {fileID: 8048861432355087587}
+  handColliderAudioSource: {fileID: 0}
+  playerDamageClips: []
+  punchSound: {fileID: 0}
 --- !u!82 &8048861432355087587
 AudioSource:
   m_ObjectHideFlags: 0

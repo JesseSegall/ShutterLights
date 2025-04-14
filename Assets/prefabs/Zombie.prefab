@@ -2559,6 +2559,7 @@ GameObject:
   - component: {fileID: 8048861431640922610}
   - component: {fileID: 7266513497122578391}
   - component: {fileID: 8135896346670352299}
+  - component: {fileID: 7474117469979777004}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Zombie
@@ -2772,7 +2773,7 @@ NavMeshAgent:
   m_Acceleration: 3
   avoidancePriority: 1
   m_AngularSpeed: 100
-  m_StoppingDistance: 2
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 0
   m_AutoRepath: 1
@@ -2794,9 +2795,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   chaseRange: 5
-  attackRange: 1.5
+  attackRange: 1
   blendDampTime: 0.1
   rotationSpeed: 5
+  audioSource: {fileID: 0}
+  zombieAggro: {fileID: 0}
 --- !u!114 &8135896346670352299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2809,6 +2812,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1a5fdf0e25fbc6418d44f4432731a6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &7474117469979777004
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7165830649072764670}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.4
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &7659288101166658998
 GameObject:
   m_ObjectHideFlags: 0
@@ -3065,7 +3082,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 2
-  zombieHitClip: {fileID: 8048861432355087587}
+  handColliderAudioSource: {fileID: 0}
+  playerDamageClips:
+  - {fileID: 8300000, guid: aa48101fd9bd24b82af88afb182a9bf5, type: 3}
+  - {fileID: 8300000, guid: ed042c87951ed40268592d7ca7a2de59, type: 3}
+  - {fileID: 8300000, guid: 5d72ee7fecf3d4c479e4f2b39d511f96, type: 3}
+  - {fileID: 8300000, guid: c9dc82dc6e6b84d02aa6d004d452bad6, type: 3}
+  punchSound: {fileID: 8300000, guid: a37f44cbf8c2a7443a3c361efa2f233a, type: 3}
 --- !u!82 &8048861432355087587
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3085,11 +3108,11 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 70
-  DopplerLevel: 1
-  MinDistance: 0.47893524
-  MaxDistance: 500
+  DopplerLevel: 0
+  MinDistance: 1
+  MaxDistance: 20
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
