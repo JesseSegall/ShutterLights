@@ -19,6 +19,7 @@ public class ZombieTest : MonoBehaviour
 
     private bool _isAttacking = false;
     private bool _hasPlayedChaseSound = false;
+    private bool _hasDetectedPlayer = false;
 
     [Header("Animation Settings")]
    
@@ -29,10 +30,10 @@ public class ZombieTest : MonoBehaviour
     public float rotationSpeed = 5f;
     
     [Header("Sound Settings")]
-    public AudioSource audioSource;
-    
+    [SerializeField] private AudioSource audioSource;
+
     [Header("Aggro Sound Clip")]
-    public AudioClip zombieAggro;
+    [SerializeField] private AudioClip zombieAggro;
     void Awake()
     {
         // Find the player if not assigned
@@ -67,17 +68,19 @@ public class ZombieTest : MonoBehaviour
         agent.avoidancePriority = Random.Range(40, 60);  
         
        
-        CapsuleCollider col = GetComponent<CapsuleCollider>();
-        if (col == null)
-        {
-            col = gameObject.AddComponent<CapsuleCollider>();
-            col.center = new Vector3(0, 1, 0);
-            col.height = 2f;
-            col.radius = 0.4f;
-        }
-        
-        // Make is trigger true so they dont push the player around
-        col.isTrigger = true;
+        // CapsuleCollider col = GetComponent<CapsuleCollider>();
+        // if (col == null)
+        // {
+        //     Debug.Log("Adding capsule collider");
+        //     col = gameObject.AddComponent<CapsuleCollider>();
+        //     col.center = new Vector3(0, 1, 0);
+        //     col.height = 2f;
+        //     col.radius = 0.4f;
+        // }
+        //
+        // // Make is trigger true so they dont push the player around
+        // col.isTrigger = false;
+        // Debug.Log("Zombie collider added to: " + gameObject.name + " with tag: " + gameObject.tag);
     }
 
     void Update()
@@ -89,6 +92,10 @@ public class ZombieTest : MonoBehaviour
         }
 
         float distance = Vector3.Distance(transform.position, player.position);
+        if (distance <= chaseRange )
+        {
+            _hasDetectedPlayer = true;
+        }
 
        
         if (_isAttacking)
@@ -104,24 +111,25 @@ public class ZombieTest : MonoBehaviour
             agent.isStopped = true;
             StartCoroutine(ContinuousAttackLoop());
         }
-        else if (distance <= chaseRange)
+        else if (_hasDetectedPlayer)
         {
             // Chase 
             if (!_hasPlayedChaseSound)
             {
                 audioSource.PlayOneShot(zombieAggro);
+                Debug.Log(zombieAggro);
                 _hasPlayedChaseSound = true;
                 
             }
             agent.isStopped = false;
             agent.SetDestination(player.position);
-            animator.SetFloat("AnimBlend", 1f, blendDampTime, Time.deltaTime); // Run animation (1)
+            animator.SetFloat("AnimBlend", 1f, blendDampTime, Time.deltaTime); // Run animation is 1 in the blend tree
         }
         else
         {
             // Idle
             agent.isStopped = true;
-            animator.SetFloat("AnimBlend", 0f, blendDampTime, Time.deltaTime); // Idle animation (0)
+            animator.SetFloat("AnimBlend", 0f, blendDampTime, Time.deltaTime); // Idle animation is 0 in the blend tree
         }
 
         
@@ -195,8 +203,8 @@ public class ZombieTest : MonoBehaviour
     void OnDrawGizmos()
     {
         
-        // Gizmos.color = Color.yellow;
-        // Gizmos.DrawWireSphere(transform.position, chaseRange);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, chaseRange);
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
