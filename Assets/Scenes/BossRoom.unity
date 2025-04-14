@@ -24648,7 +24648,7 @@ PrefabInstance:
     - target: {fileID: 1395477455353143876, guid: a77f974f80e644cb4a3c2cedae408923,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1395477455906560900, guid: a77f974f80e644cb4a3c2cedae408923,
         type: 3}
@@ -24709,6 +24709,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: PauseMenuNoTutorial, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4557592688298821774, guid: a77f974f80e644cb4a3c2cedae408923,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4557592688298821774, guid: a77f974f80e644cb4a3c2cedae408923,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4557592688298821774, guid: a77f974f80e644cb4a3c2cedae408923,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4557592688549989565, guid: a77f974f80e644cb4a3c2cedae408923,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4557592688549989565, guid: a77f974f80e644cb4a3c2cedae408923,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 39336061140445061, guid: a77f974f80e644cb4a3c2cedae408923, type: 3}
@@ -26877,6 +26902,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PauseManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6260787561087831077, guid: bfd137618078b439b8c535e5bf57b8fd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6260787561087831076, guid: bfd137618078b439b8c535e5bf57b8fd, type: 3}
