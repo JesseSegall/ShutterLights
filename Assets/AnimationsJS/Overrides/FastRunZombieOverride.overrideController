@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FastRunZombieOverride
+  m_Controller: {fileID: 9100000, guid: e56a7384982b59e4893dbf838f3b1c01, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: -5912145118209366543, guid: 0636141c91b6dcd4489c6b23b480083c,
+      type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: fd255472ecd095d44a8eb8a3f6feed0b,
+      type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: a88702ceabbef1040bcda3da6a42f220, type: 2}
+    m_OverrideClip: {fileID: -203655887218126122, guid: 715acafcc3d8e6240b5b77689f20fe5b,
+      type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 99f51f6877b370a41bc63e7e25aede34, type: 2}
+    m_OverrideClip: {fileID: -203655887218126122, guid: 8f3e7ef99f2a2d04bacaf9ff03084896,
+      type: 3}
