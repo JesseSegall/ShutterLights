@@ -26,7 +26,7 @@ public TMP_Text checkpointText;
             Light leftLight = leftTorch.GetComponent<Light>();
             rightLight.enabled = true;
             leftLight.enabled = true;
-            audioSource.PlayOneShot(checkpointSound);
+            audioSource.PlayOneShot(checkpointSound, 0.5f);
             firstTime = true;
             if (checkpointText != null)
             {
