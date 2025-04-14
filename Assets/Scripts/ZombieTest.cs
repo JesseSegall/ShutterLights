@@ -17,7 +17,8 @@ public class ZombieTest : MonoBehaviour
     
     public float attackRange = 2.5f;
 
-    private bool isAttacking = false;
+    private bool _isAttacking = false;
+    private bool _hasPlayedChaseSound = false;
 
     [Header("Animation Settings")]
    
@@ -26,7 +27,12 @@ public class ZombieTest : MonoBehaviour
     [Header("Rotation Settings")]
    
     public float rotationSpeed = 5f;
-
+    
+    [Header("Sound Settings")]
+    public AudioSource audioSource;
+    
+    [Header("Aggro Sound Clip")]
+    public AudioClip zombieAggro;
     void Awake()
     {
         // Find the player if not assigned
@@ -44,6 +50,7 @@ public class ZombieTest : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        audioSource = GetComponent<AudioSource>();
 
        
         agent.updateRotation = true;
@@ -84,7 +91,7 @@ public class ZombieTest : MonoBehaviour
         float distance = Vector3.Distance(transform.position, player.position);
 
        
-        if (isAttacking)
+        if (_isAttacking)
         {
             agent.isStopped = true;
             LookAtTarget(player.position);
@@ -100,6 +107,12 @@ public class ZombieTest : MonoBehaviour
         else if (distance <= chaseRange)
         {
             // Chase 
+            if (!_hasPlayedChaseSound)
+            {
+                audioSource.PlayOneShot(zombieAggro);
+                _hasPlayedChaseSound = true;
+                
+            }
             agent.isStopped = false;
             agent.SetDestination(player.position);
             animator.SetFloat("AnimBlend", 1f, blendDampTime, Time.deltaTime); // Run animation (1)
@@ -131,7 +144,7 @@ public class ZombieTest : MonoBehaviour
 
     IEnumerator ContinuousAttackLoop()
     {
-        isAttacking = true;
+        _isAttacking = true;
         animator.SetBool("isAttacking", true);
 
         
@@ -154,7 +167,7 @@ public class ZombieTest : MonoBehaviour
 
        
         animator.SetBool("isAttacking", false);
-        isAttacking = false;
+        _isAttacking = false;
         Debug.Log("Exiting Attack Loop, switching back to Chase");
         yield break;
     }
@@ -164,7 +177,7 @@ public class ZombieTest : MonoBehaviour
     {
         if (animator)
         {
-            if (isAttacking)
+            if (_isAttacking)
             {
                 // When attacking, force zero movement
                 agent.velocity = Vector3.zero;
