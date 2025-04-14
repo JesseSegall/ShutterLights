@@ -24,6 +24,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TransitionRoom1ToMain.unity
     guid: f592c208163c68e40b6164a59f1145ec
   - enabled: 1
+    path: Assets/Scenes/TransitionBossRoom.unity
+    guid: 7260a861bb7ae0246a5c4c512c1582bf
+  - enabled: 1
     path: Assets/Scenes/BossRoom.unity
     guid: 1506908f40a4640e0ad621dd91c1b22f
   - enabled: 1
