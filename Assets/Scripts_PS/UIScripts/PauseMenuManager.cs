@@ -12,6 +12,7 @@ public class PauseMenuManager : MonoBehaviour
     public GameObject pauseMenuUI;
     public Button resumeButton;
     private CanvasGroup canvasGroup;
+    private GameObject player;
 
     void Awake()
     {
@@ -22,6 +23,7 @@ public class PauseMenuManager : MonoBehaviour
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0f;
+        player = GameObject.FindGameObjectWithTag("Player");
         
     }
 
@@ -84,6 +86,11 @@ public class PauseMenuManager : MonoBehaviour
         public void RestartGame()
     {
         Time.timeScale = 1f; // Reset time scale
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
+        canvasGroup.alpha = 0f;
+        isPaused = false;
+        DontDestroyOnLoad(player);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
