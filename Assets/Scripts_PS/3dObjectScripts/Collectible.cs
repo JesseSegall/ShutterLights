@@ -3,6 +3,15 @@ using UnityEngine;
 public class Collectible : MonoBehaviour
 {
     public int collectibleValue = 1;
+    private MeshRenderer meshRenderer;
+    private Collider orbCollider;
+
+     private void Start()
+    {
+        meshRenderer = GetComponent<MeshRenderer>();
+        orbCollider = GetComponent<Collider>();
+
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -12,7 +21,9 @@ public class Collectible : MonoBehaviour
             ScoreManager.instance.AddScore(collectibleValue);
 
             // Destroy the collectible after collection
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            meshRenderer.enabled = false;
+            orbCollider.enabled = false;
         }
     }
 }
