@@ -101,8 +101,8 @@ public class SpeedBoostOrb : MonoBehaviour
             }
 
             // Apply the boost to both move and sprint speeds.
-            controller.MoveSpeed *= speedMultiplier;
-            controller.SprintSpeed *= speedMultiplier;
+            controller.MoveSpeed = speedMultiplier * originalMoveSpeed;
+            controller.SprintSpeed = speedMultiplier * originalSprintSpeed;
         }
 
         // disable increasing speed boost again
