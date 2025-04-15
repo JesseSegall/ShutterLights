@@ -17,6 +17,7 @@ public class TutorialGuide : MonoBehaviour
     public GameObject greenOrb;
     public GameObject redOrb;
     public GameObject areaLight;
+    public GameObject chalice;
     private LightDecayStatusBar script;
     private bool tutorialVisible = true;
     public bool tutorialOver = false;
@@ -34,12 +35,14 @@ public class TutorialGuide : MonoBehaviour
         "Press Space to jump onto the elevator.",
         "Press Q to pause the game",
         "Notice your health bar is decreasing over time",
-        "To refill your health bar collect light orbs",
+        "To refill your health bar and gain points collect light orbs",
         "There are also power ups",
         "Go collect the green orb",
         "Notice your jump is much higher",
         "Go collect the red orb",
         "Notice you can now run faster",
+        "Now go collect the gold chalice",
+        "You earn a lot of points by finding these chalices",
         "Enter level one by moving over the light orange portal at the end of the hallway"
     };
 
@@ -83,6 +86,7 @@ public class TutorialGuide : MonoBehaviour
             { 7,  () => true },
             { 9,  () => Input.GetKeyDown(KeyCode.Space) && !greenOrb.GetComponent<MeshRenderer>().enabled},
             { 11, () => (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && !redOrb.GetComponent<MeshRenderer>().enabled},
+            { 13, () => true },
             { tutorialSteps.Length - 1, () => true }
         };
     }
@@ -125,7 +129,7 @@ public class TutorialGuide : MonoBehaviour
     }
 
     IEnumerator DelayNextStep(){
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         delayCoroutine = null;
         NextStep();
     }
@@ -202,6 +206,8 @@ public class TutorialGuide : MonoBehaviour
         else if (currentStep == 1) target = wayPointOne;
         else if (currentStep == 8) target = greenOrb;
         else if (currentStep == 10) target = redOrb;
+        else if (currentStep == 12) target = chalice;
+
 
         if (target != null && target.activeInHierarchy)
         {
