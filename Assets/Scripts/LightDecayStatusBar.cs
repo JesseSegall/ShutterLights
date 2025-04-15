@@ -10,9 +10,9 @@ public class LightDecayStatusBar : MonoBehaviour
     public Image lightStatusBar;
     public YouDiedScreenManager youDiedManager;
 
-    private float timer = 0f;
+    public float timer = 0f;
     private bool gameOverTriggered = false;
-    
+
 
     private void Awake()
     {
