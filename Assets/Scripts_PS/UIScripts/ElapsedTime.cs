@@ -5,6 +5,16 @@ public class ElapsedTime : MonoBehaviour
 {
     public TextMeshProUGUI elapsedTimeText;
     private float elapsedTime;
+    public static ElapsedTime instance;
+
+
+    void Awake()
+    {
+        if(instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
+    }
 
     void Update()
     {
@@ -28,5 +38,9 @@ public class ElapsedTime : MonoBehaviour
             elapsedTimeText.color = Color.yellow;
         else // Start to 2 minutes: Green
             elapsedTimeText.color = Color.green;
+    }
+
+    public void ResetTime() {
+        elapsedTime = 0f;
     }
 }
