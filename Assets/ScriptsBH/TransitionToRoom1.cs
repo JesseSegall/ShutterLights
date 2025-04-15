@@ -9,6 +9,8 @@ public class TransitionToRoom1 : MonoBehaviour
     void Start()
     {
         StartCoroutine(LoadNext());
+        ScoreManager.instance.ResetScore();
+        ElapsedTime.instance.ResetTime();
     }
 
     IEnumerator LoadNext(){

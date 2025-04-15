@@ -53,6 +53,8 @@ public class TutorialGuide : MonoBehaviour
         string spawnPointID = PlayerManager.Instance?.CurrentSpawnPointID;
         Debug.Log("Tutotrial Script: Spawn Point ID: " + spawnPointID);
         script = LightDecayStatusBar.Instance;
+        redOrbCollected = false;
+        greenOrbCollected = false;
 
         if (spawnPointID == "SpawnPoint_MenuRespawn" || string.IsNullOrEmpty(spawnPointID))
         {
@@ -84,8 +86,8 @@ public class TutorialGuide : MonoBehaviour
             { 4,  () => Input.GetKeyDown(KeyCode.Q) },
             { 5,  () => true },
             { 7,  () => true },
-            { 9,  () => Input.GetKeyDown(KeyCode.Space) && !greenOrb.GetComponent<MeshRenderer>().enabled},
-            { 11, () => (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && !redOrb.GetComponent<MeshRenderer>().enabled},
+            { 9,  () => Input.GetKeyDown(KeyCode.Space) && greenOrbCollected},
+            { 11, () => (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && redOrbCollected},
             { 13, () => true },
             { tutorialSteps.Length - 1, () => true }
         };
@@ -170,6 +172,14 @@ public class TutorialGuide : MonoBehaviour
         Debug.Log("Next button clicked!");
         //loop through the steps so the player can learn the game
         currentStep++;
+
+        if (currentStep == 11 && !redOrb.GetComponent<MeshRenderer>().enabled) {
+            redOrbCollected = true;
+        }
+
+        if (currentStep == 9 && !greenOrb.GetComponent<MeshRenderer>().enabled) {
+            greenOrbCollected = true;
+        }
 
         if (currentStep < tutorialSteps.Length)
         {
