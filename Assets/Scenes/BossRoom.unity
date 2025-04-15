@@ -945,6 +945,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Small Concrete Block (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 2293833494671341136, guid: c6dc982ba2b5fea479389bd687200a9d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Terrain
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6dc982ba2b5fea479389bd687200a9d, type: 3}
 --- !u!1001 &75998073
@@ -2335,6 +2340,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Small Concrete Block (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293833494671341136, guid: c6dc982ba2b5fea479389bd687200a9d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Terrain
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6dc982ba2b5fea479389bd687200a9d, type: 3}
@@ -8717,6 +8727,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CellDoorRoot (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5666705246248238684, guid: 352ec93d923f84fd2aecedb4b86c8276,
+        type: 3}
+      propertyPath: m_TagString
+      value: Terrain
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 352ec93d923f84fd2aecedb4b86c8276, type: 3}
 --- !u!1001 &292384040
@@ -9249,10 +9264,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orbFirePoint: {fileID: 1047222168}
   bossProjectile: {fileID: 1877908179}
-  healthBar: {fileID: 1811376068}
+  healthBar: {fileID: 1353059002}
   footPoint: {fileID: 2095520183}
   bossHealth: 100
-  projectileSpeed: 15
+  projectileSpeed: 25
   runSpeed: 3
   closeRange: 5
   stompRange: 3
@@ -10159,6 +10174,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Small Concrete Block (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293833494671341136, guid: c6dc982ba2b5fea479389bd687200a9d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Terrain
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6dc982ba2b5fea479389bd687200a9d, type: 3}
@@ -11692,6 +11712,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Small Concrete Block (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2293833494671341136, guid: c6dc982ba2b5fea479389bd687200a9d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Terrain
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6dc982ba2b5fea479389bd687200a9d, type: 3}
 --- !u!1 &599760432
@@ -12318,6 +12343,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CellDoorRoot
+      objectReference: {fileID: 0}
+    - target: {fileID: 5666705246248238684, guid: 352ec93d923f84fd2aecedb4b86c8276,
+        type: 3}
+      propertyPath: m_TagString
+      value: Terrain
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 352ec93d923f84fd2aecedb4b86c8276, type: 3}
@@ -22948,6 +22978,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Small Concrete Block (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 2293833494671341136, guid: c6dc982ba2b5fea479389bd687200a9d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Terrain
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6dc982ba2b5fea479389bd687200a9d, type: 3}
 --- !u!1 &1744474385
@@ -24371,6 +24406,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Small Concrete Block (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293833494671341136, guid: c6dc982ba2b5fea479389bd687200a9d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Terrain
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6dc982ba2b5fea479389bd687200a9d, type: 3}

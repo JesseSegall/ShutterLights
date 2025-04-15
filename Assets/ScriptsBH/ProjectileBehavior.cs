@@ -24,11 +24,11 @@ public class ProjectileBehavior : MonoBehaviour
             audioSource.PlayOneShot(playerImpactSound);
             LightDecayStatusBar lightBar = collision.gameObject.GetComponentInChildren<LightDecayStatusBar>();
             LightDecay lightArea = collision.gameObject.GetComponentInChildren<LightDecay>();
-            lightBar.DamageTaken(4f);
+            lightBar.DamageTaken(12f);
             Invoke("DestroyProjectile", 1.0f);
             //lightArea.GhostContactAreaLight(2f);
         }
-        if(collision.gameObject.CompareTag("Terrain")) {
+        if(collision.gameObject.CompareTag("Terrain") || collision.gameObject.CompareTag("Floor")) {
             Invoke("DestroyProjectile", 1.0f);
         }
     }
