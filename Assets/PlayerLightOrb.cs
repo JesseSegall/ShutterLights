@@ -27,7 +27,7 @@ public class PlayerLightOrb : MonoBehaviour
     void Update()
     {
         float currentColorRgb = 1 - (statusBar.timer / statusBar.decayDuration);
-        Color newColor = new Color(currentColorRgb, currentColorRgb, currentColorRgb, 0.5f);
+        Color newColor = new Color(currentColorRgb, currentColorRgb, currentColorRgb, 0.25f);
         renderer.material.SetColor("_BaseColor", newColor);
         renderer.material.SetColor("_EmissionColor", newColor);
     }
