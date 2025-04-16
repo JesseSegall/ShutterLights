@@ -51,8 +51,11 @@ public class PauseMenuManager : MonoBehaviour
         canvasGroup.alpha = 1f;
         Time.timeScale = 0f;
 
-        if (TutorialGuide.Instance != null && !TutorialGuide.Instance.tutorialOver){
-            TutorialGuide.Instance.ToggleTutorial();
+        if (SceneManager.GetActiveScene().name == "MainScene")
+        {
+            if (TutorialGuide.Instance != null && !TutorialGuide.Instance.tutorialOver){
+                TutorialGuide.Instance.ToggleTutorial();
+            }
         }
 
         // Unlock the cursor for UI interaction
@@ -77,7 +80,7 @@ public class PauseMenuManager : MonoBehaviour
         
 
         // Lock the cursor back if needed
-        if (TutorialGuide.Instance == null || !TutorialGuide.Instance.tutorialPanel.activeSelf)
+        if (TutorialGuide.Instance == null || !TutorialGuide.Instance.tutorialPanel.activeSelf || SceneManager.GetActiveScene().name != "MainScene")
         {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -92,6 +95,8 @@ public class PauseMenuManager : MonoBehaviour
         isPaused = false;
         DontDestroyOnLoad(player);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void QuitGame()

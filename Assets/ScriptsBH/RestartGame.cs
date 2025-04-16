@@ -6,6 +6,11 @@ using UnityEngine.SceneManagement;
 public class RestartGame : MonoBehaviour
 {
 
+    void Awake(){
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
     void Update(){
         if (Input.GetKeyDown(KeyCode.X)) {
             LoadMainScene();
