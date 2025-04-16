@@ -8,7 +8,9 @@ public class PlayerDeath : MonoBehaviour
 
     private void Awake()
     {
+        
         Instance = this; // Singleton for easy access
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -31,12 +33,13 @@ public class PlayerDeath : MonoBehaviour
         }
         ScoreManager.instance.AddScore(-100);
 
-
+        
         RespawnAtCheckpoint();
+        
     }
 
     private void RespawnAtCheckpoint()
-    {
+    {   Debug.Log("Respawn at checkpoint called");
         if (PlayerManager.Instance == null)
         {
             Debug.Log("Player Manager is null something went wrong!");
