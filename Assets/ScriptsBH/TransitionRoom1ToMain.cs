@@ -12,7 +12,7 @@ public class TransitionRoom1ToMain : MonoBehaviour
     }
 
     IEnumerator LoadNext(){
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         SceneManager.LoadScene("MainScene");
     }
 }

@@ -477,7 +477,7 @@ GameObject:
   - component: {fileID: 877357388}
   - component: {fileID: 877357387}
   m_Layer: 5
-  m_Name: RestartGame
+  m_Name: QuitGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -561,9 +561,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 877357387}
-        m_TargetAssemblyTypeName: StartScreenManager, Assembly-CSharp
-        m_MethodName: StartGame
+      - m_Target: {fileID: 1037466683}
+        m_TargetAssemblyTypeName: RestartGame, Assembly-CSharp
+        m_MethodName: LoadMainScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -759,6 +759,7 @@ GameObject:
   - component: {fileID: 1037466681}
   - component: {fileID: 1037466680}
   - component: {fileID: 1037466679}
+  - component: {fileID: 1037466683}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -852,6 +853,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1037466683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037466678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ede70c0e7ef61b4389d66e5cb6b8c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1128423454
 GameObject:
   m_ObjectHideFlags: 0
@@ -1028,7 +1041,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Restart Game
+  m_text: 'Quit Game
 
 '
   m_isRightToLeft: 0
