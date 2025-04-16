@@ -9,13 +9,16 @@ public class LightDecayStatusBar : MonoBehaviour
     public float decayDuration = 30f;
     public Image lightStatusBar;
     public YouDiedScreenManager youDiedManager;
+    private PlayerDeath playerDeath;
+    public GameObject player;
 
-    private float timer = 0f;
+    public float timer = 0f;
     private bool gameOverTriggered = false;
-    
+
 
     private void Awake()
     {
+        playerDeath =  player.GetComponentInChildren<PlayerDeath>();
         // Check to make sure if an old light bar exists its destroyed
         if (Instance != null && Instance != this)
         {
@@ -45,17 +48,25 @@ public class LightDecayStatusBar : MonoBehaviour
         }
 
 
-
+        
         if (ratio <= 0f && !gameOverTriggered)
         {
+            if (playerDeath != null)
+            {
+                playerDeath =  player.GetComponentInChildren<PlayerDeath>();
+            }
             gameOverTriggered = true;
             Debug.Log("[LightDecayStatusBar] Light fully decayed. Triggering game over.");
-
-            if (PlayerDeath.Instance != null)
-            {
-                PlayerDeath.Instance.TriggerDeath();
-                Debug.Log("[LightDecayStatusBar] PlayerDeath triggered.");
-            }
+            playerDeath.TriggerDeath();
+            // if (PlayerDeath.Instance != null)
+            // {
+            //     PlayerDeath.Instance.TriggerDeath();
+            //     Debug.Log("[LightDecayStatusBar] PlayerDeath triggered.");
+            // }
+            // else
+            // {
+            //     Debug.Log("Instance is Null");
+            // }
 
             if (youDiedManager != null)
             {
@@ -63,6 +74,7 @@ public class LightDecayStatusBar : MonoBehaviour
                 Debug.Log("[LightDecayStatusBar] You Died screen shown.");
             }
         }
+       
     }
 
     public void IncreaseLight(float boostTime)
@@ -79,25 +91,34 @@ public class LightDecayStatusBar : MonoBehaviour
 
     public void DamageTaken(float damageAmount)
     {
-      ;
+     
         timer += damageAmount;
         float ratio = Mathf.Clamp01(1 - (timer / decayDuration));
         if (lightStatusBar != null)
         {
             lightStatusBar.fillAmount = ratio;
         }
-
-
+    
         if (ratio <= 0f && !gameOverTriggered)
         {
+            
+            if (playerDeath != null)
+            {
+                playerDeath =  player.GetComponentInChildren<PlayerDeath>();
+            }
+
             gameOverTriggered = true;
             Debug.Log("[LightDecayStatusBar] Light fully decayed due to damage. Triggering game over.");
-
-            if (PlayerDeath.Instance != null)
-            {
-                PlayerDeath.Instance.TriggerDeath();
-                Debug.Log("[LightDecayStatusBar] PlayerDeath triggered.");
-            }
+            playerDeath.TriggerDeath();
+            // if (PlayerDeath.Instance != null)
+            // {
+            //     PlayerDeath.Instance.TriggerDeath();
+            //     Debug.Log("[LightDecayStatusBar] PlayerDeath triggered.");
+            // }
+            // else
+            // {
+            //     Debug.Log("Instance is Null");
+            // }
 
             if (youDiedManager != null)
             {

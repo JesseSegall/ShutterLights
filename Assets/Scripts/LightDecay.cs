@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class LightDecay : MonoBehaviour
 {
-    public float initialIntensity = 20f;
+    public float initialIntensity = 50;
     private Light areaLight;
    // Singleton
     private LightDecayStatusBar lightDecayStatus;
