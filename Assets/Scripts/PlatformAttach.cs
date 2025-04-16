@@ -56,7 +56,7 @@ public class PlatformAttach : MonoBehaviour
                 // Attach if not already attached to this platform.
                 if (transform.parent != hit.collider.transform)
                 {
-                    Debug.Log("Attaching to object: " + hit.collider.name);
+                    //Debug.Log("Attaching to object: " + hit.collider.name);
                     // keep our same world pos so its less janky movement
                     transform.SetParent(hit.collider.transform, true);
                     _currentPlatform = hit.collider.transform;
@@ -79,7 +79,7 @@ public class PlatformAttach : MonoBehaviour
     {
         if (transform.parent != null)
         {
-            Debug.Log("Detaching from: " + transform.parent.name);
+            //Debug.Log("Detaching from: " + transform.parent.name);
             transform.SetParent(null, true);
             _currentPlatform = null;
         }
