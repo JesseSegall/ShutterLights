@@ -47,13 +47,13 @@ public class ZombieTest : MonoBehaviour
 
     void OnEnable()
     {
-        // Subscribe to the player respawn event.
+        // Sub to the event
         PlayerDeath.OnPlayerRespawn += ResetZombie;
     }
 
     void OnDisable()
     {
-        // Unsubscribe from the event to avoid memory leaks.
+        // Un sub from event so don't leak memory
         PlayerDeath.OnPlayerRespawn -= ResetZombie;
     }
 
@@ -63,7 +63,7 @@ public class ZombieTest : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         audioSource = GetComponent<AudioSource>();
 
-        // Save the original spawn position.
+        // Save the original spawn position of the zombie
         _zombieSpawnPosition = transform.position;
         Debug.Log(gameObject.name + " recorded spawn at: " + _zombieSpawnPosition);
 
