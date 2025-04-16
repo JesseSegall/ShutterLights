@@ -14,7 +14,7 @@ public class TransitionToRoom1 : MonoBehaviour
     }
 
     IEnumerator LoadNext(){
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         SceneManager.LoadScene("Room_1");
     }
 }

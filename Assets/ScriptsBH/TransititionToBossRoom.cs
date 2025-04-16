@@ -13,7 +13,7 @@ public class TransititionToBossRoom : MonoBehaviour
     }
 
     IEnumerator LoadNext(){
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         SceneManager.LoadScene("BossRoom");
     }
 }

@@ -54,7 +54,7 @@ public class BossBehavior : MonoBehaviour
         UpdateHealthBar();
         LookAtPlayer(3f);
 
-        if (bossHealth <= 0)
+        if (bossHealth <= 5)
         {
             OnDeath();
             return;

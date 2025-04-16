@@ -10670,6 +10670,7 @@ MonoBehaviour:
   decayDuration: 15
   lightStatusBar: {fileID: 24864527}
   youDiedManager: {fileID: 0}
+  player: {fileID: 0}
   timer: 0
 --- !u!114 &462613397
 MonoBehaviour:
@@ -17928,7 +17929,7 @@ PrefabInstance:
     - target: {fileID: 8283796516704604274, guid: 647eb038464274536bc65d26ea589d3d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 16
+      value: 14.71
       objectReference: {fileID: 0}
     - target: {fileID: 8283796516704604274, guid: 647eb038464274536bc65d26ea589d3d,
         type: 3}
@@ -17983,7 +17984,7 @@ PrefabInstance:
     - target: {fileID: 8283796516744987059, guid: 647eb038464274536bc65d26ea589d3d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.85
       objectReference: {fileID: 0}
     - target: {fileID: 8283796516744987060, guid: 647eb038464274536bc65d26ea589d3d,
         type: 3}
