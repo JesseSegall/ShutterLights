@@ -73,7 +73,7 @@ Manifest:
 		i. Created scripts to modify the characters jump height and speed
 		ii. Created the orbs that allow the player to gain these abilities
 		iii. Created ui elements to track these power ups and there duration
-		iv. Assisted with orb respawning and placement. 
+		iv. Assisted with orb respawning and placement.
 	b. UI elements
 		i. Created the pause ui elements, with buttons and functionality, allowing for restart, resume, and quit
 		ii. Created a light status bar that keeps track of our players health.
@@ -96,8 +96,8 @@ Manifest:
 		ii. Utilized Probuilder to 3D model the Assets: MainRoom, Elevator, Stairs, Room entrances, cell doors
 		iii. Added torch lighting for the doors and elevator
 		iv. Created the layout for the bossRoom
-		v. Utilized Probuilder to 3D model the Assets: BossRoom, Columns, CellDoors
-		vi. Created prefabs for cell doors, corridors, cell doors
+		v. Utilized Probuilder to 3D model the Assets: BossRoom, Columns, CellDoors, Elevators, Damage Orbs, Boss Projectile
+		vi. Created prefabs for cell doors, corridors, cell doors, moving elevators
 	b. Scene loading
 		i. Created colliders with scripts which load in scenes from the main room to room_1 and the BossRoom
 	c. Main Room doors
@@ -105,7 +105,29 @@ Manifest:
 		ii. Added scripts for colliders and doors so that the animations begin when the player completes room_1
 	d. Elevator
 		i. Animated the elevator to the BossRoom
-		ii. created colliders and scripts for triggering the elevator and transitioning to the BossRoom
+		ii. Created colliders and scripts for triggering the elevator and transitioning to the BossRoom
 		iii. Updated scripts to manage player light meter to disable while on the elevator and reenable in BossRoom
+	e. Adjustable camera sensitivity
+		i. Added a slider to the menu and linked it to the player to permanently update the player's camera sens.
+		ii. Changed the object hierarchy so that the menu can piggy back off of the player's persistance across scenes
+	f. Boss Combat
+		i. Added purple light orbs that damage the Boss
+		ii. Wrote scripts to damage the boss when the light connects with the boss and obstruct beam on some terrain
+		iii. Updated the boss projectile logic to launch from the boss to the player. Updated speed and damage in scripts
+		iv. Added collision sounds for the projectile hitting the player. Fixed logic around projectiles disappearing after hit
+	g. Player Light Orb
+		i. Created the orb that sits on top of the player
+		ii. Created and adjusted scripts to affect the color of the orb and the area light behind the player when their
+		health goes down or takes damage
+		iii. Changed lighting settings to prioritize the light near the player by baking other light sources and using realtime
+		for the light on the player
+	h. List of all scripts originally authored:
+		i. CamSense.cs, ColumnRotationTiming.cs, DoorControl.cs, DoorStarter.cs, ElevatorControl.cs, ElevatorStarter.cs
+		LightBeamController.cs, RoomLoader.cs, BossRoomLoader.cs, PlayerLightOrb.cs
+	i. Scripts functions contributed to
+		i. Player motion - adjusted jump speed per feedback from playtest.
+		ii. Fixed bug where speed up orbs have a multiplicative effects
+		iii. Contributed towards fixing player death not working in multiple areas
+		iv. Boss projectile mechanics
 
 
