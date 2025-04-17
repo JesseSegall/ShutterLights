@@ -69,26 +69,53 @@ Manifest:
 
 
 3. Patrick
-	a. Player Abilities
-		i. Created scripts to modify the characters jump height and speed
-		ii. Created the orbs that allow the player to gain these abilities
-		iii. Created ui elements to track these power ups and there duration
-		iv. Assisted with orb respawning and placement.
-	b. UI elements
-		i. Created the pause ui elements, with buttons and functionality, allowing for restart, resume, and quit
-		ii. Created a light status bar that keeps track of our players health.
-	c. Player Design
-		i. Created player design using existing mesh. Added light source that demonstrates health.
-		ii. Created script that updates light based on players health.
-	c. Start and End Scene
-		i. Created the start scene when the game loads, adding art, music, and buttons to start the game
-		ii. Created the end scene that is displayed when the boss level is finished. With a restart button to start the game again.
-	d. Bug Fixes
-		i. Minor bug fixes such as player death and health reset
-		ii. Camera fixes so that it doesnt go through walls.
-	e. Design changes
-		i. Added design elements to improve play feel, such as a platform to show where the player can stand to load next scene
-		ii. Light orbs to guide the player to their destination.
+    a. Player Abilities
+        i. Created scripts to modify the character’s jump height and speed
+        ii. Created the orbs that allow the player to gain these abilities
+        iii. Created UI elements to track these power-ups and their duration
+        iv. Assisted with orb respawning and placement
+    b. UI Elements
+        i. Created the pause UI elements, with buttons and functionality for restart, resume, and quit
+        ii. Created a light status bar that keeps track of the player’s health
+    c. Player Design
+        i. Created player design using existing mesh; added a light source that visually represents health
+        ii. Created script that updates the light source based on player health
+    d. Start and End Scene
+        i. Created the start scene with art, music, and a start game button
+        ii. Created the end scene triggered after boss level completion, including a restart button
+    e. Bug Fixes
+        i. Fixed bugs related to player death and health reset
+        ii. Resolved camera issues such as clipping through walls
+    f. Design Changes
+        i. Added design elements like platforms to show loading zones for next scenes
+        ii. Implemented light orbs to guide the player through the game
+    g. Boss Room Enhancements
+        i. Edited lighting and structure to prevent the player from falling
+        ii. Updated boss appearance with a new skin and animation set
+        iii. Added new AI states for the boss to chase the player
+        iv. Fixed bugs with gates and room logic
+    h. Main Room Design
+        i. Enhanced room interactivity by adding design assets, such as starting room to segment off the player
+        ii. Blocked off unused exits
+		iii. Added images and lights to improve game feel
+		iv. Added additional buildings and treasures to the main room for exploration
+    i. Room 1 Enhancements
+        i. Created a secondary path including rotating items, platforms, and spinning donuts
+        ii. Added spike traps that damage the player
+        iii. Fixed bugs like random spawning and lack of death triggers
+    j. Score & Progression System
+        i. Created a score system, timer, and supporting scripts
+        ii. Added collectible trophies that increase player score
+    k. Tutorial & Gate Logic
+        i. Implemented gate control logic that responds to tutorial completion
+        ii. Added decorative wall art assets for better game feel
+    l. Room 1 Moving Assets
+        i. Scripted movement logic for dynamic room elements
+	m. ScriptsScripts Created: AmmoPickup.cs, AxisRotator.cs, CircularMovement.cs, Collectible.cs, 
+		CylinderRotator.cs, MovingPlatform.cs, MovingSpike.cs, OpenGate.cs, PlayerShooting.cs, ScoreManager.cs, 
+		TorusGenerator.cs, FlickeringLight.cs, HighJumpOrb.cs, LightOrbRespawn.cs, SpeedBoostOrb.cs, ElapsedTime.cs, 
+		PauseMenuManager.cs, StartScreenManager.cs
+
 
 4. Tao
 	a. 3D Modeling and design for MainRoom and the BossRoom
