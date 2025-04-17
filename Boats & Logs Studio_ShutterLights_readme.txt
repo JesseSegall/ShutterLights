@@ -52,11 +52,12 @@ Manifest:
 2. Jesse
 	a. 3D modeling and design of Room_1
 		i. Created the layout of Room_1
-		ii. Utilized Probuilder to 3D model the Assets: Entrance, Lava_Floor, Spike Room, TrapBuildingTwo, Spike and Ceiling
+		ii. Utilized Probuilder to 3D model the Assets: Entrance, Lava_Floor, Spike Room, ZombieHordeBuilding, Spike and Ceiling
 		iii. Used prebuilt wall prefabs from the Prison Assets Pack to construct a maze with spike pits inside the Spike Room
 		iv. Used the column prefabs from the Prison Assets Pack to create the Pillar Jump Blocks as well as the Column Jump sections
 		v. Added Lava Area Light to simulate light emission from the lava floor. Light will only reflect off of items with default layer so it does not illuminate the inside of buildings.
 		vi. Added background music to the Main Room scene and Room_1 scene.
+		vii. Created a maze for a zombie horde to chase the player through.
 	b. Checkpoint/Spawnpoint System
 		i. Checkpoint.cs and Spawnpoint.cs are two scripts that control spawning the player at the most recent checkpoint that has been crossed when the player dies. The spawn point script can be used to create a spawn point where ever needed.
 		ii. Added PlayerDeath.cs and PersistantObject.cs which attaches to the player. PlayerDeath will spawn the player at the most recent checkpoint on death, PersistantObject makes sure the player doesn't get destroyed when going between scenes.
@@ -65,6 +66,16 @@ Manifest:
 	d. Moving Platforms
 		i. Created Platform prefabs that have a PlatformMovement.cs script attached to them
 		ii. The script will show a gizmo outlining the movement path. The Move distance, speed, and direction can be adjusted as well as the Phase Offset so the platforms can start at different positions.
+		iii. Created PlatformAttach.cs script so player moves with the platform and doesnt bounce around.
+	e. Zombie Enemies
+		i. Used a premade zombie model and created a custom 1D blend tree to blend between idle and attacking states
+		ii. Created the AI for the zombie utilizing NavMesh and ZombieTest.cs script so the zombies will chase the player until they get in a certain range and the an attack animation will play. All animations are using root motion.
+		iii. Added different sound effects for different types of zombies.
+		iv. There are three different types of zombies that vary in their idle and chase animations.
+		v. Zombies in the horde room will reset to their original starting position when the player dies. 
+	f. List of all scripts originally authored scripts:
+		i. AreaLightShine.cs, Checkpoint.cs, LightDecay.cs, OrbDamage.cs, OrbShooter.cs, PersistantObject.cs, PlatformAttach.cs, PlatformMovement.cs, PlayerDeath.cs, PlayerManager.cs,
+		RoomLoaderTest.cs, SpawnPoint.cs, SpikeRoomZombieAudio.cs, SpotlightController.cs, ZombieTest.cs
 
 
 
